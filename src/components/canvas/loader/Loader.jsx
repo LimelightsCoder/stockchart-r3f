@@ -330,7 +330,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               <pointLight position={[5, 5, 5]} />
               {/* <RotatingCube progress={displayProgress} /> */}
               <EffectComposer>
-                <Pixelation granularity={5} />
+                <Pixelation granularity={4} />
                 <Noise opacity={0.075} />
                 <Bloom
                   luminanceThreshold={0}
@@ -355,7 +355,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             // Animation properties
           >
             {/* {` ${Math.min(Math.round(displayProgress), 100)}%`} */}
-            {displayProgress < 100 ? `${Math.min(Math.round(displayProgress), 100)}%` : '<CP/>'}
+            {displayProgress < 100 ? `${Math.min(Math.round(displayProgress), 100)}%` : '<ℂℙ/>'}
           </Text>
 
 

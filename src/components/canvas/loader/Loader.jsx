@@ -354,7 +354,8 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             scale={[1 + (displayProgress / 100) * 0.5, 1 + (displayProgress / 100) * 0.5, 1]}
             // Animation properties
           >
-            {` ${Math.min(Math.round(displayProgress), 100)}%`}
+            {/* {` ${Math.min(Math.round(displayProgress), 100)}%`} */}
+            {displayProgress < 100 ? `${Math.min(Math.round(displayProgress), 100)}%` : '<CP/>'}
           </Text>
 
 

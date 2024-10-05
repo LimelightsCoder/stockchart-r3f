@@ -198,7 +198,7 @@ font-display: swap;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 999;
+  z-index: 9999;
   transform: scale(1); /* Start scale */
   transition: transform 2s ease, opacity 2s ease; /* Smooth transition */
 }
@@ -237,7 +237,7 @@ font-display: swap;
   overflow: visible;
   -webkit-filter: url("#goo");
   filter: url("#goo");
-  z-index: 999;
+  z-index: 9999;
 }
 
 .loaderText {

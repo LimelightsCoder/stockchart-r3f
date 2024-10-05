@@ -1,11 +1,12 @@
 import Footer from '@/components/dom/footer';
 import { Layout } from '@/components/dom/Layout'
-// import { ScrollWrapper } from '@/components/dom/ScrollWrapper';
 import '@/global.css'
 import Scroll from '@/templates/Scroll';
 import dynamic from 'next/dynamic'
 
 const MobileMenu = dynamic(() => import('@/components/dom/menuLayout/MobileMenu'), { ssr: false });
+// const ScrollWrapper = dynamic(() => import('@/components/dom/ScrollWrapper'), { ssr: false });
+
 
 export const metadata = {
   title: 'Next.js + Three.js',

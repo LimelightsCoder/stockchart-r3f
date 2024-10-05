@@ -73,6 +73,23 @@ font-display: swap;
   touch-action: auto; /* Enable native touch gestures on scroll container */
 }
 
+
+/* .scroll-container {
+  position: relative;
+  height: 100vh; 
+  overflow: hidden; 
+  will-change: transform; 
+  display: flex; 
+
+}
+
+.scroll-container div {
+  width: 100%;
+  transform: translate3d(0, 0, 0); 
+  will-change: transform;
+} */
+
+
 .menu-button {
 
   font-size: 2.25vw; /* Default size */

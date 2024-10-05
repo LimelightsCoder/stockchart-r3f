@@ -269,7 +269,7 @@ const dissolveShader = {
     u_resolution: { value: new THREE.Vector2() },
     u_dissolveTexture: { value: null },  // Load dissolve texture separately
     u_threshold: { value: 0.5 }, // Start with threshold at 0.5
-    u_pixelSize: { value: 32.0 },  // Adjusted pixel size for medium-sized pixels
+    u_pixelSize: { value: 64.0 },  // Adjusted pixel size for medium-sized pixels
     u_uvScale: { value: new THREE.Vector2(1.0, 1.0) }  // UV scale to control zoom
   },
   vertexShader: `
@@ -299,39 +299,34 @@ const dissolveShader = {
       
       if (alpha < 0.1) discard;
   
-      // Updated color definitions for a more diverse gradient
-      vec3 color1 = vec3(0.0, 0.0, 1.0);   // Blue
-      vec3 color2 = vec3(0.0, 1.0, 1.0);   // Cyan
-      vec3 color3 = vec3(0.0, 1.0, 0.0);   // Green
-      vec3 color4 = vec3(1.0, 1.0, 0.0);   // Yellow
-      vec3 color5 = vec3(1.0, 0.5, 0.0);   // Orange
-      vec3 color6 = vec3(1.0, 0.0, 0.0);   // Red
-      vec3 color7 = vec3(0.5, 0.0, 0.5);   // Purple
-      vec3 color8 = vec3(1.0, 1.0, 1.0);   // White
+      // Updated color definitions with your colors
+      vec3 color4 = vec3(0.020, 0.337, 1.000);  // #0556FF
+      vec3 color2 = vec3(1.000, 0.756, 0.075);  // #FFC11F
+      vec3 color3 = vec3(0.518, 0.094, 0.937);  // #8424EF
+      vec3 color1 = vec3(0.239, 0.929, 0.588);  // #3DEF96
+      vec3 color5 = vec3(0.110, 0.110, 0.110);  // #252525
+      vec3 color6 = vec3(0.961, 0.961, 0.957);  // #F5F5F4
   
       // Interpolating colors based on dissolveValue
       vec3 selectedColor;
-      if (dissolveValue < 0.125) {
-          selectedColor = mix(color1, color2, dissolveValue / 0.125);
-      } else if (dissolveValue < 0.25) {
-          selectedColor = mix(color2, color3, (dissolveValue - 0.125) / 0.125);
-      } else if (dissolveValue < 0.375) {
-          selectedColor = mix(color3, color4, (dissolveValue - 0.25) / 0.125);
-      } else if (dissolveValue < 0.5) {
-          selectedColor = mix(color4, color5, (dissolveValue - 0.375) / 0.125);
-      } else if (dissolveValue < 0.625) {
-          selectedColor = mix(color5, color6, (dissolveValue - 0.5) / 0.125);
-      } else if (dissolveValue < 0.75) {
-          selectedColor = mix(color6, color7, (dissolveValue - 0.625) / 0.125);
-      } else if (dissolveValue < 0.875) {
-          selectedColor = mix(color7, color8, (dissolveValue - 0.75) / 0.125);
+      if (dissolveValue < 0.166) {
+          selectedColor = mix(color1, color2, dissolveValue / 0.166);
+      } else if (dissolveValue < 0.332) {
+          selectedColor = mix(color2, color3, (dissolveValue - 0.166) / 0.166);
+      } else if (dissolveValue < 0.498) {
+          selectedColor = mix(color3, color4, (dissolveValue - 0.332) / 0.166);
+      } else if (dissolveValue < 0.664) {
+          selectedColor = mix(color4, color5, (dissolveValue - 0.498) / 0.166);
+      } else if (dissolveValue < 0.83) {
+          selectedColor = mix(color5, color6, (dissolveValue - 0.664) / 0.166);
       } else {
-          selectedColor = mix(color8, color1, (dissolveValue - 0.875) / 0.125); // Loop back to blue
+          selectedColor = mix(color6, color1, (dissolveValue - 0.83) / 0.17);  // Loop back to blue
       }
   
       gl_FragColor = vec4(selectedColor, alpha);
   }
-  `
+`
+
   };
 
 

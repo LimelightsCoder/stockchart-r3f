@@ -145,7 +145,7 @@ const dissolveShader = {
     u_dissolveTexture: { value: null },  // Load dissolve texture separately
     u_threshold: { value: 0.5 }, // Start with threshold at 0.5
     u_pixelSize: { value: 128.0 },  // Adjusted pixel size for medium-sized pixels
-    u_uvScale: { value: new THREE.Vector2(1.0, 1.0) }  // UV scale to control zoom
+    u_uvScale: { value: new THREE.Vector2(1.05, 1.05) }  // UV scale to control zoom
   },
   vertexShader: `
     varying vec2 vUv;

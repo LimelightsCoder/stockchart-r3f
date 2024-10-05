@@ -51,9 +51,9 @@ export default function Page() {
       >
         
         {/* Overlay HTML Content */}
-        <div className='relative flex flex-col items-center justify-center w-full h-full text-white' style={{ pointerEvents: 'none', zIndex:2 }}>
+        <div className='relative flex flex-col items-center justify-center  w-full h-full text-white py-20' style={{ pointerEvents: 'none', zIndex:2 }}>
           {/* Title Section with 100vh height */}
-          <div className='flex flex-col items-start justify-center h-screen w-[96vw] text-start'>
+          <div className='flex flex-col items-start justify-center h-screen w-[96vw] text-start py-8'>
           {/* <h1 className='flex relative my-4 text-5xl font-bold leading-tight uppercase'>Cory.dev</h1> */}
             <p className='flex uppercase text-[8vw] pointer-events-none select-none'>creative developer</p>
             <div className='flex relative w-[65vw] pointer-events-none select-none'>
@@ -63,16 +63,16 @@ export default function Page() {
             <p className="flex relative text-start justify-start items-start mt-12 text-[3vw] pointer-events-none select-none">Based in Los Angeles</p>
             <CurrentTime/>
             
-            <div className="field">
+            {/* <div className="field">
               <div className="mouse"></div>
-            </div>
+            </div> */}
             <div className='absolute flex  top-[80vh] right-4'>
             <svg width="5vw" height="5vh" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clip-path="url(#clip0_116_153)"> <path d="M100 0C103.395 53.7596 146.24 96.6052 200 100C146.24 103.395 103.395 146.24 100 200C96.6052 146.24 53.7596 103.395 0 100C53.7596 96.6052 96.6052 53.7596 100 0Z" fill="url(#paint0_linear_116_153)"/> </g> <defs> <linearGradient id="paint0_linear_116_153" x1="100" y1="0" x2="100" y2="200" gradientUnits="userSpaceOnUse"> <stop stop-color="#ffffff"/> <stop offset="1" stop-color="#ffffff"/> </linearGradient> <clipPath id="clip0_116_153"> <rect width="200" height="200" fill="white"/> </clipPath> </defs> </svg>
             </div>
           </div>
 
 
-          <div className='flex relative h-px w-screen bg-[#ffffffcc] '/>
+
 
 
           {/* Project Overview Section */}
@@ -108,14 +108,13 @@ export default function Page() {
 
 
             {/* About */}
-            <section className="mt-10 mb-10 text-center">
+            {/* <section className="mt-10 mb-10 text-center">
             <h2 className="flex w-[96vw] px-4 text-[3.75vw] font-bold uppercase pointer-events-none select-none">About</h2>
-            {/* <p className="mt-2 text-md sm:max-w-[75vw]">
-            </p> */}
+
             <div className="flex px-4  mt-2 sm:max-w-[75vw] pointer-events-none select-none">
             <WordSplit value={AboutParagraph} />
             </div>
-          </section>
+          </section> */}
 
 
 

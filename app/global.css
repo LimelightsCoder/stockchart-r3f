@@ -64,7 +64,7 @@ font-display: swap;
     padding: 0;
     overflow: hidden;
     touch-action: unset;
-    background-color: #0f0f0f;
+    background-color: #020202;
     font-family: 'Wotfard-Regular', 'GeneralSans';
   }
 }
@@ -143,7 +143,7 @@ font-display: swap;
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #030303; 
+  background-color: #020202; 
   z-index: 999;
 }
 

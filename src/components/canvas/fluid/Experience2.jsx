@@ -48,16 +48,16 @@ const Experience2 = () => {
           adaptationRate={1.0}
         /> */}
           <Pixelation
-            granularity={10} // pixel granularity
+            granularity={10.5} // pixel granularity
           />
     {/* <Grid
-    blendFunction={BlendFunction.LUMINOSITY} // blend mode
+    blendFunction={BlendFunction.COLOR_DODGE} // blend mode
     scale={1.0} // grid pattern scale
     lineWidth={0.0} // grid pattern line width
     size={{ width, height }} // overrides the default pass width and height
   /> */}
-  {/* <SSAO
-    blendFunction={BlendFunction.DIFFERENCE} // blend mode
+  <SSAO
+    blendFunction={BlendFunction.NORMAL} // blend mode
     samples={30} // amount of samples per pixel (shouldn't be a multiple of the ring count)
     rings={4} // amount of rings in the occlusion sampling pattern
     distanceThreshold={1.0} // global distance threshold at which the occlusion effect starts to fade out. min: 0, max: 1
@@ -68,7 +68,7 @@ const Experience2 = () => {
     radius={20} // occlusion sampling radius
     scale={0.5} // scale of the ambient occlusion
     bias={0.5} // occlusion bias
-  /> */}
+  />
       </EffectComposer>
     </>
   )

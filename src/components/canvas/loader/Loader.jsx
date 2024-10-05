@@ -244,6 +244,7 @@ import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 import { EffectComposer, Pixelation, Noise, Bloom } from '@react-three/postprocessing';
 import { KernelSize } from "postprocessing";
+import { Text } from '@react-three/drei'; // Import Text from drei
 import styles from './style.module.scss'; // Ensure this CSS module exists
 
 // Import the PixelationShader (transition effect)
@@ -275,6 +276,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
   const [isAnimating, setIsAnimating] = useState(false); // State to control pixel animation
   const [showPixelTransition, setShowPixelTransition] = useState(false); // Control the pixelation shader
   const [pixelSize, setPixelSize] = useState(1); // Initialize pixel size for smooth transition
+
 
   useEffect(() => {
     const interval = 100; // Update progress every 100 ms
@@ -326,9 +328,9 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             <Canvas>
               <ambientLight />
               <pointLight position={[5, 5, 5]} />
-               {/* <RotatingCube progress={displayProgress} /> */}
+              {/* <RotatingCube progress={displayProgress} /> */}
               <EffectComposer>
-                <Pixelation granularity={8} />
+                <Pixelation granularity={5} />
                 <Noise opacity={0.05} />
                 <Bloom
                   luminanceThreshold={0}
@@ -341,6 +343,19 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                 />
               </EffectComposer>
 
+              {/* Animated Text */}
+              <Text
+                position={[0, 0, 0]} // Position in 3D space
+                fontSize={0.5} // Adjust font size
+                color="#ffffff" // Set text color
+                anchorX="center" // Center the text
+                anchorY="middle" // Center the text
+                // Animate scale based on progress
+                scale={[1 + (displayProgress / 100) * 0.5, 1 + (displayProgress / 100) * 0.5, 1]}
+                // Animation properties
+                children={` ${Math.min(Math.round(displayProgress), 100)}%`}
+              />
+
               {/* Show Pixelation Transition Shader when loading completes with fade-in effect */}
               {showPixelTransition && (
                 <motion.mesh
@@ -351,30 +366,19 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                   <DissolveTransition pixelSize={pixelSize} />
                 </motion.mesh>
               )}
-
             </Canvas>
           </div>
        
           <div className="loader-container">
-          <div className="loader">
+            <div className="loader">
               <svg width="404" height="370" viewBox="0 0 404 370" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path 
                     d="M55.4111 367.216C36.654 361.492 16.4084 344.541 8.28886 327.769C-6.15558 297.931 0.146114 260.599 23.26 239.084C40.0763 223.426 50.4734 219.374 80.1676 216.906C103.73 214.959 118.964 208.96 129.777 197.401C149.935 175.858 152.937 143.086 137.062 117.847C111.845 77.7561 130.024 22.5378 173.94 5.82594C210.726 -8.16999 252.711 8.41094 270.095 43.8187C275.487 54.7966 276.308 59.1374 276.308 76.6516C276.308 95.8578 275.852 97.7613 266.861 115.9C261.521 126.673 256.781 139.947 255.96 146.43C252.999 169.806 265.918 195.622 287.145 208.748C296.438 214.492 300.867 215.567 321.225 217.02C338.839 218.263 347.641 220.075 356.832 224.282C408.375 247.879 419.513 312.813 378.363 349.812C362.03 364.496 346.157 369.992 323.403 368.84C308.345 368.068 303.18 366.725 291.258 360.36C277.264 352.904 265.684 341.248 258.819 327.709C254.347 318.893 236.599 302.537 227.396 298.75C196.855 286.191 165.331 296.937 146.248 326.45C127.057 356.117 105.057 369.492 76.0709 369.122C67.7915 369.122 58.4946 368.156 55.4111 367.216Z" 
                     fill="#ffffff"
                 />
-            </svg>
-
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 450 450">
-                <defs>
-                    <filter id="goo">
-                        <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
-                        <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="goo" />
-                        <feComposite in="SourceGraphic" in2="goo" operator="atop"/>
-                    </filter>
-                </defs>
-            </svg>
-              </div>
+              </svg>
             </div>
+          </div>
 
           {/* Loading Progress as percentage */}
           <div className="loaderText">

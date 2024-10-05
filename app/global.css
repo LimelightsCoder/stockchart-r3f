@@ -12,6 +12,44 @@
   font-weight: normal;
   font-style: normal;
 }
+
+@font-face {
+  font-family: "GeneralSans";
+  src: url('/fonts/GeneralSans-Regular.eot');
+  src: url('/fonts/GeneralSans-Regular.woff2') format('woff2'),
+        url('/fonts/GeneralSans-Variable.ttf') format('truetype'),
+        url('/fonts/GeneralSans-Regular.otf') format('opentype');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "GeneralSans";
+  src: url('/fonts/GeneralSans-Bold.eot');
+  src: url('/fonts/GeneralSans-Bold.woff2') format('woff2'),
+        url('/fonts/GeneralSans-Bold.ttf') format('truetype'),
+        url('/fonts/GeneralSans-Bold.otf') format('opentype');
+  font-weight: 900;
+}
+
+@font-face {
+font-family: 'GeneralSans-VariableItalic';
+ src: url('/fonts/GeneralSans-VariableItalic.eot');
+src: url('/fonts/GeneralSans-VariableItalic.woff2') format('woff2'),
+     url('/fonts/GeneralSans-VariableItalic.woff') format('woff'),
+     url('/fonts/GeneralSans-VariableItalic.ttf') format('truetype'),
+     url('/fonts/GeneralSans-Italic.otf') format('opentype');
+font-weight: 200 700;
+font-display: swap;
+font-style: italic;
+}
+
+@font-face {
+font-family: 'GeneralSans-Italic';
+src: url('/fonts/GeneralSans-Italic.otf') format('opentype');
+font-weight: normal; /* Define weight explicitly for non-variable font */
+font-style: italic;
+font-display: swap;
+}
 @layer base {
   * {
     box-sizing: border-box;
@@ -27,11 +65,13 @@
     overflow: hidden;
     touch-action: unset;
     background-color: #000000;
-    font-family: 'Wotfard-Regular';
+    font-family: 'Wotfard-Regular', 'GeneralSans';
   }
 }
 
-
+[data-scroll-container] {
+  touch-action: auto; /* Enable native touch gestures on scroll container */
+}
 
 .menu-button {
 

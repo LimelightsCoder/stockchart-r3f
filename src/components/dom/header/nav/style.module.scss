@@ -1,0 +1,50 @@
+.nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 10vh 4vw 5vh 4vw; // Use vh and vw for more responsive padding
+    height: 100%;
+    max-height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden; // Enable scrolling if content overflows on short screens
+    user-select: none;
+    
+    .body {
+      display: flex;
+      gap: 1vh;
+      flex-direction: column;
+  
+      a {
+        text-decoration: none;
+        color: black;
+        font-size: clamp(16px, 8vw, 36px); // Use clamp for responsive font size
+      }
+    }
+  
+    .footer {
+      display: flex;
+      flex-wrap: wrap;
+  
+      a {
+        width: 50%;
+        margin-top: 1vh;
+        font-size: clamp(12px, 4vw, 24px); // Make footer links smaller on small screens
+      }
+    }
+  }
+  
+  // Add media queries for further adjustments
+  @media (max-height: 500px) {
+    .nav {
+      padding: 5vh 4vw 2vh 4vw; // Reduce padding for very short screens
+    }
+  
+    .body a {
+      font-size: clamp(14px, 6vw, 28px); // Further reduce font size if the height is small
+    }
+  
+    .footer a {
+      font-size: clamp(10px, 3vw, 18px); // Adjust footer link sizes for short screens
+    }
+  }
+  

@@ -1,0 +1,88 @@
+
+@font-face {
+    font-family: "GeneralSans";
+    src: url('/fonts/GeneralSans-Regular.eot');
+    src: url('/fonts/GeneralSans-Regular.woff2') format('woff2'),
+          url('/fonts/GeneralSans-Variable.ttf') format('truetype'),
+          url('/fonts/GeneralSans-Regular.otf') format('opentype');
+    font-weight: 400;
+  }
+
+  @font-face {
+    font-family: 'Wotfard-Regular', sans-serif;
+    src: url('/fonts/wotfard-regular-webfont.eot');
+    src: url('/fonts/wotfard-regular-webfont.woff2') format('woff2'),
+         url('/fonts/wotfard-regular-webfont.ttf') format('truetype'),
+         url('/fonts/Wotfard-Regular.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+
+.paragraphOne {
+    font-size: 2.25vw;
+    font-family: "Wotfard-Regular";
+    display: flex;
+    flex-wrap: wrap; /* Ensure words wrap onto the next line */
+    line-height: 1.2; /* Slightly increased for better readability */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    overflow: hidden; /* Hide any overflow content */
+
+    @media (max-width: 768px) {
+      font-size: 3vw;
+      line-height: 1;
+    }
+
+    @media (min-width: 1024px) {
+        font-size: 1.25vw;
+      }
+  
+    .wordOne {
+        // color: white;
+      margin-right: 12px;
+      margin-top: 12px;
+      position: relative;
+      white-space: nowrap; /* Prevent wrapping of individual words */
+      display: inline-block; /* Ensure proper alignment */
+    }
+    .letter {
+        display: inline-block;
+        will-change: transform; // Optimizes performance
+      }
+  
+    .shadowOne {
+      position: absolute;
+      opacity: 0.1;
+      top: 0;
+      left: 0;
+      z-index: -1; /* Ensure shadow is behind the text */
+    }
+  }
+  
+  .paragraphTwo {
+    font-size: 8vw;
+    display: flex;
+    flex-wrap: wrap; /* Ensure words wrap onto the next line */
+    font-family: "GeneralSans";
+    line-height: 1.2; /* Slightly increased for better readability */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    overflow: hidden; /* Hide any overflow content */
+  
+    .wordTwo {
+      margin-right: 12px;
+      margin-top: 12px;
+      position: relative;
+      white-space: nowrap; /* Prevent wrapping of individual words */
+      display: inline-block; /* Ensure proper alignment */
+    }
+  
+    .shadowTwo {
+      position: absolute;
+      opacity: 0.1;
+      top: 0;
+      left: 0;
+      z-index: -1; /* Ensure shadow is behind the text */
+    }
+  }
+  

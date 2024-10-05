@@ -1,5 +1,10 @@
+import Footer from '@/components/dom/footer';
 import { Layout } from '@/components/dom/Layout'
+import { ScrollWrapper } from '@/components/dom/ScrollWrapper';
 import '@/global.css'
+import dynamic from 'next/dynamic'
+
+const MobileMenu = dynamic(() => import('@/components/dom/menuLayout/MobileMenu'), { ssr: false });
 
 export const metadata = {
   title: 'Next.js + Three.js',
@@ -14,10 +19,18 @@ export default function RootLayout({ children }) {
         head.tsx. Find out more at https://beta.nextjs.org/docs/api-reference/file-conventions/head
       */}
       <head />
+     
       <body>
-        {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
-        <Layout>{children}</Layout>
+      <ScrollWrapper>
+        <Layout>
+          <MobileMenu />
+            {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
+            {children}
+          <Footer/>
+         </Layout>
+        </ScrollWrapper>
       </body>
+      
     </html>
   )
 }

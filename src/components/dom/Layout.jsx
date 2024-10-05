@@ -1,13 +1,41 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
+
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
+const Loader = dynamic(() => import('../canvas/loader/Loader'), { ssr: false })
 
 const Layout = ({ children }) => {
   const ref = useRef()
+  const [loading, setLoading] = useState(true);
+
+  const handleLoadingStarted = () => {
+    setLoading(false); // Once loading finishes, hide the loader
+  };
+
+    // Use effect to hide body and html while loading
+    useEffect(() => {
+      const html = document.documentElement;
+      const body = document.body;
+  
+      if (loading) {
+        html.style.overflow = 'hidden'; // Prevent scrolling on html
+        body.style.overflow = 'hidden'; // Prevent scrolling on body
+      } else {
+        html.style.overflow = ''; // Restore overflow
+        body.style.overflow = ''; // Restore overflow
+      }
+  
+      return () => {
+        html.style.overflow = ''; // Cleanup on unmount
+        body.style.overflow = ''; // Cleanup on unmount
+      };
+    }, [loading]);
 
   return (
+    <>
+    {loading && <Loader started={loading} onStarted={handleLoadingStarted} />}
     <div
       ref={ref}
       style={{
@@ -32,6 +60,7 @@ const Layout = ({ children }) => {
         eventPrefix='client'
       />
     </div>
+    </>
   )
 }
 

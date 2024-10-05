@@ -1,0 +1,41 @@
+.project{
+    display: flex;
+    gap: 2rem;
+    width: 100vw;
+    justify-content: space-between;
+    align-items: center;
+    padding: 50px 100px 50px 100px;
+    border-top: 1px solid rgb(201, 201, 201);
+    cursor: pointer;
+    transition: all 0.2s;
+    user-select: none;
+
+    h2{
+        font-size: 4vw;
+        margin: 0px;
+        font-weight: 400;
+        transition: all 0.4s;
+        text-transform: uppercase;
+    }
+
+    p{
+        transition: all 0.4s;
+        font-weight: 300;
+    }
+
+    &:last-of-type{
+        border-bottom: 1px solid rgb(201, 201, 201);
+    }
+
+    &:hover{
+        opacity: 0.5;
+
+        h2{
+            transform: translateX(-10px);
+        }
+
+        p{
+            transform: translateX(10px);
+        }
+    }
+}

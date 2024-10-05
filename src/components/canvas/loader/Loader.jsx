@@ -345,16 +345,18 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
 
               {/* Animated Text */}
               <Text
-                position={[0, 0, 0]} // Position in 3D space
-                fontSize={0.5} // Adjust font size
-                color="#ffffff" // Set text color
-                anchorX="center" // Center the text
-                anchorY="middle" // Center the text
-                // Animate scale based on progress
-                scale={[1 + (displayProgress / 100) * 0.5, 1 + (displayProgress / 100) * 0.5, 1]}
-                // Animation properties
-                children={` ${Math.min(Math.round(displayProgress), 100)}%`}
-              />
+            position={[0, 0, 0]} // Position in 3D space
+            fontSize={0.5} // Adjust font size
+            color="#ffffff" // Set text color
+            anchorX="center" // Center the text
+            anchorY="middle" // Center the text
+            // Animate scale based on progress
+            scale={[1 + (displayProgress / 100) * 0.5, 1 + (displayProgress / 100) * 0.5, 1]}
+            // Animation properties
+          >
+            {` ${Math.min(Math.round(displayProgress), 100)}%`}
+          </Text>
+
 
               {/* Show Pixelation Transition Shader when loading completes with fade-in effect */}
               {showPixelTransition && (

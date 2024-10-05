@@ -13,7 +13,7 @@ import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion';
 import Button from './button';
 import styles from './style.module.scss';
-import Nav from './Nav';
+import Nav from './nav/Nav';
 
 const menu = {
     open: {

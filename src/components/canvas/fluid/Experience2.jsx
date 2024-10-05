@@ -30,7 +30,7 @@ const Experience2 = () => {
           densityDissipation={0.94}
           velocityDissipation={0.94}
           intensity={0.25}
-          rainbow={false}
+          rainbow={true}
           blend={5}
           fluidColor='#0f58ff'
           backgroundColor='#555555'

@@ -9,8 +9,8 @@ const MobileMenu = dynamic(() => import('@/components/dom/menuLayout/MobileMenu'
 
 
 export const metadata = {
-  title: 'Next.js + Three.js',
-  description: 'A minimal starter for Nextjs + React-three-fiber and Threejs.',
+  title: 'Cory Parrish | Creative Developer',
+  description: 'Official Website of Developer Cory Parrish, Creative Coder, Web Developer.',
 }
 
 export default function RootLayout({ children }) {

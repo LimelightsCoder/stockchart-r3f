@@ -329,7 +329,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                {/* <RotatingCube progress={displayProgress} /> */}
               <EffectComposer>
                 <Pixelation granularity={8} />
-                <Noise opacity={0.075} />
+                <Noise opacity={0.05} />
                 <Bloom
                   luminanceThreshold={0}
                   luminanceSmoothing={0.9}

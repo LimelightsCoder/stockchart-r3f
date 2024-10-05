@@ -26,11 +26,11 @@ const Experience2 = () => {
           swirl={3}
           distortion={0.3}
           force={10}
-          pressure={0.96}
-          densityDissipation={0.96}
-          velocityDissipation={0.96}
+          pressure={0.94}
+          densityDissipation={0.94}
+          velocityDissipation={0.94}
           intensity={0.25}
-          rainbow={true}
+          rainbow={false}
           blend={5}
           fluidColor='#0f58ff'
           backgroundColor='#555555'

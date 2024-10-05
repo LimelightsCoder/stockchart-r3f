@@ -168,7 +168,7 @@ font-display: swap;
 
 .loader-container {
   position: fixed;
-  font-family: "GeneralSans";
+  font-family: 'Wotfard-Regular', 'GeneralSans';
   top: 0;
   left: 0;
   width: 100%;
@@ -213,7 +213,7 @@ font-display: swap;
   width: var(--blob-size);
   height: var(--blob-size);
   position: absolute;
-  bottom: 5%;
+  bottom: 10%;
   left: 10%;
   transform: translate(-50%, -50%); /* Centers the element */
   overflow: visible;
@@ -228,7 +228,7 @@ font-display: swap;
   left: 3%;
   /* transform: translate(-50%, -50%); */
   color: white;
-  font-family: "Wotfard";
+  font-family: 'Wotfard-Regular', 'GeneralSans';
   font-size: 30px;
   user-select: none;
   z-index: 2001;
@@ -237,7 +237,7 @@ font-display: swap;
 .percentage {
   position: absolute;
   font-size: 10px;
-  font-family: "Wotfard";
+  font-family: 'Wotfard-Regular', 'GeneralSans';
   color: #ffffffc1;
   z-index: 2001;
 }

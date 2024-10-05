@@ -20,7 +20,7 @@
 
 .paragraphOne {
     font-size: 2.25vw;
-    font-family: "Wotfard-Regular";
+    font-family: 'Wotfard-Regular', 'GeneralSans';
     display: flex;
     flex-wrap: wrap; /* Ensure words wrap onto the next line */
     line-height: 1.2; /* Slightly increased for better readability */
@@ -29,12 +29,12 @@
     overflow: hidden; /* Hide any overflow content */
 
     @media (max-width: 768px) {
-      font-size: 3vw;
+      font-size: 4vw;
       line-height: 1;
     }
 
     @media (min-width: 1024px) {
-        font-size: 1.25vw;
+        font-size: 1.5vw;
       }
   
     .wordOne {

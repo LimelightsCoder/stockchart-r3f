@@ -302,14 +302,14 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                 clearInterval(pixelInterval);
                 setTimeout(() => {
                   onStarted(); // Trigger final start
-                }, 500); // Delay to let the effect complete
+                }, 800); // Delay to let the effect complete
                 return prev;
               }
               return prev + 1; // Increment pixel size
             });
           }, 100); // Update every 100ms for smooth transition
 
-        }, 100); // Wait a bit before starting transition
+        }, 50); // Wait a bit before starting transition
       }
     }, interval);
 
@@ -331,7 +331,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               {/* <RotatingCube progress={displayProgress} /> */}
               <EffectComposer>
                 <Pixelation granularity={5} />
-                <Noise opacity={0.05} />
+                <Noise opacity={0.075} />
                 <Bloom
                   luminanceThreshold={0}
                   luminanceSmoothing={0.9}

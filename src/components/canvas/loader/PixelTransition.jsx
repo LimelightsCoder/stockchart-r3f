@@ -156,41 +156,41 @@ const dissolveShader = {
     }
   `,
   fragmentShader: `
-  uniform float u_time;
-  uniform sampler2D u_dissolveTexture;
-  uniform float u_threshold;
-  uniform float u_pixelSize;
-  uniform vec2 u_uvScale; 
-  varying vec2 vUv;
+    uniform float u_time;
+    uniform sampler2D u_dissolveTexture;
+    uniform float u_threshold;
+    uniform float u_pixelSize;
+    uniform vec2 u_uvScale; 
+    varying vec2 vUv;
 
-  // Updated colors with the new palette
-  vec3 color1 = vec3(0.020, 0.337, 1.000); // #0556FF
-  vec3 color2 = vec3(1.000, 0.756, 0.075); // #FFC11F
-  vec3 color3 = vec3(0.518, 0.094, 0.937); // #8424EF
-  vec3 color4 = vec3(0.239, 0.929, 0.588); // #3DEF96
-  vec3 color5 = vec3(0.110, 0.110, 0.110); // #252525
-  vec3 color6 = vec3(0.961, 0.961, 0.957); // #F5F5F4
+    vec3 color1 = vec3(0.341, 0.890, 0.620); // #56E39F
+    vec3 color2 = vec3(1.000, 0.722, 0.000); // #FFB800
+    vec3 color3 = vec3(0.125, 0.569, 0.839); // #1E91D6
+    vec3 color4 = vec3(0.447, 0.037, 0.720); // #7209B7
+    vec3 color5 = vec3(0.053, 0.247, 0.267); // #0D3E44
+    vec3 color6 = vec3(0.031, 0.020, 0.000); // #010400
+    vec3 color7 = vec3(1.000, 0.984, 0.988); // #FFFBFC
 
-  void main() {
-    vec2 scaledUV = vUv * u_uvScale;
-    vec2 pixelatedUV = floor(scaledUV * u_pixelSize) / u_pixelSize;
+    void main() {
+      vec2 scaledUV = vUv * u_uvScale;
+      vec2 pixelatedUV = floor(scaledUV * u_pixelSize) / u_pixelSize;
 
-    float dissolveValue = texture2D(u_dissolveTexture, pixelatedUV).r; 
-    
-    float alpha = smoothstep(u_threshold - 0.02, u_threshold + 0.02, dissolveValue);
-    
-    if (alpha < 0.1) discard;  
+      float dissolveValue = texture2D(u_dissolveTexture, pixelatedUV).r; 
+      
+      float alpha = smoothstep(u_threshold - 0.02, u_threshold + 0.02, dissolveValue);
+      
+      if (alpha < 0.1) discard;  
 
-    // Using an array for colors
-    vec3 colors[6]; // Updated array size to 6
-    colors[0] = color1; colors[1] = color2; colors[2] = color3;
-    colors[3] = color4; colors[4] = color5; colors[5] = color6; // Updated color count
+      // Using an array for colors
+      vec3 colors[7];
+      colors[0] = color1; colors[1] = color2; colors[2] = color3;
+      colors[3] = color4; colors[4] = color5; colors[5] = color6; colors[6] = color7;
 
-    int colorIndex = int(mod(dissolveValue * float(colors.length() - 1), 6.0)); // Adjusting the index calculation
-    vec3 selectedColor = colors[colorIndex];
+      int colorIndex = int(mod(dissolveValue * 6.0, 7.0));
+      vec3 selectedColor = colors[colorIndex];
 
-    gl_FragColor = vec4(selectedColor, alpha);
-  }
+      gl_FragColor = vec4(selectedColor, alpha);
+    }
 `
 
 

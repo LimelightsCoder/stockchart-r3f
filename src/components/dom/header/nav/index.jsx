@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { links, footerLinks } from './data';
 import { perspective, slideIn } from "./anim";
 
-export default function index() {
+export default function Nav() {
   return (
     <div className={styles.nav}>
        <div className={styles.body}>

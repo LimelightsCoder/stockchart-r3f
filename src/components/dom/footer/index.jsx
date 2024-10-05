@@ -91,7 +91,7 @@ const Footer = () => {
       </div>
         {/* <Avatar /> */}
         <Image
-  src="/img/Avatar.png"
+  src="/img/Avatar2.png"
   width={0}
   height={0}
   sizes="(max-width: 150px) 100vw, (max-width: 300px) 50vw, 33vw"

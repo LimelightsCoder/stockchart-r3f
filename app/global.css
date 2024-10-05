@@ -237,6 +237,7 @@ font-display: swap;
   overflow: visible;
   -webkit-filter: url("#goo");
   filter: url("#goo");
+  z-index: 999;
 }
 
 .loaderText {

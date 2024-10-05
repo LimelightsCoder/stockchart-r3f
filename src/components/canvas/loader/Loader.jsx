@@ -355,7 +355,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             // Animation properties
           >
             {/* {` ${Math.min(Math.round(displayProgress), 100)}%`} */}
-            {displayProgress < 100 ? `${Math.min(Math.round(displayProgress), 100)}%` : '<ℂℙ/>'}
+            {displayProgress < 100 ? `${Math.min(Math.round(displayProgress), 100)}%` : '</>'}
           </Text>
 
 

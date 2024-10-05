@@ -15,8 +15,7 @@ import {
 import { Fluid } from './Fluid';
 
 const Experience2 = () => {
-  const width = window.innerWidth;
-  const height = window.innerHeight;
+
   return (
     <>
       <EffectComposer>

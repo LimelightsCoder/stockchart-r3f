@@ -25,17 +25,17 @@ const Experience2 = () => {
           swirl={3}
           distortion={0.3}
           force={10}
-          pressure={0.94}
+          pressure={0.96}
           densityDissipation={0.94}
-          velocityDissipation={0.94}
-          intensity={0.25}
+          velocityDissipation={0.96}
+          intensity={0.5}
           rainbow={false}
           blend={5}
           fluidColor='#0f58ff'
           backgroundColor='#555555'
           showBackground={false}
         />
-        <Noise opacity={0.075} />
+        {/* <Noise opacity={0.075} /> */}
 
         {/* <ToneMapping
           //blendFunction={BlendFunction.DIFFERENCE}
@@ -47,13 +47,13 @@ const Experience2 = () => {
           adaptationRate={1.0}
         /> */}
           <Pixelation
-            granularity={10.5} // pixel granularity
+            granularity={16} // pixel granularity
           />
     {/* <Grid
     blendFunction={BlendFunction.COLOR_DODGE} // blend mode
     scale={1.0} // grid pattern scale
     lineWidth={0.0} // grid pattern line width
-    size={{ width, height }} // overrides the default pass width and height
+    size={{ 100, 100 }} // overrides the default pass width and height
   /> */}
   {/* <SSAO
     blendFunction={BlendFunction.NORMAL} // blend mode

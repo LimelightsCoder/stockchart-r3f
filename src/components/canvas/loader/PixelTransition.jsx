@@ -380,7 +380,7 @@ const DissolveTransition = () => {
       />
     
               <Text
-            position={[0, 1, 0]} // Position in 3D space
+            position={[0, 0.5, 0]} // Position in 3D space
             fontSize={0.3} // Adjust font size
             color="#ffffff" // Set text color
             anchorX="center" // Center the text

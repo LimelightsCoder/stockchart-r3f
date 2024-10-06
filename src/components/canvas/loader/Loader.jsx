@@ -372,7 +372,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             </Canvas>
           </div>
        
-          <div className="loader-container">
+         
             <div className="loader">
               <svg width="404" height="370" viewBox="0 0 404 370" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path 
@@ -381,7 +381,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                 />
               </svg>
             </div>
-          </div>
+       
 
           {/* Loading Progress as percentage */}
           <div className="loaderText">

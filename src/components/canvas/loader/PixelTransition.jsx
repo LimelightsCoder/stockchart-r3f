@@ -270,7 +270,7 @@ const dissolveShader = {
     u_resolution: { value: new THREE.Vector2() },
     u_dissolveTexture: { value: null },  // Load dissolve texture separately
     u_threshold: { value: 0.5 }, // Start with threshold at 0.5
-    u_pixelSize: { value: 128.0 },  // Adjusted pixel size for medium-sized pixels
+    u_pixelSize: { value: 64.0 },  // Adjusted pixel size for medium-sized pixels
     u_uvScale: { value: new THREE.Vector2(1.0, 1.0) }  // UV scale to control zoom
   },
   vertexShader: `
@@ -301,12 +301,12 @@ const dissolveShader = {
       if (alpha < 0.1) discard;
   
       // Updated color definitions with your colors
-      vec3 color5 = vec3(0.020, 0.337, 1.000);  // #0556FF
+      vec3 color2 = vec3(0.020, 0.337, 1.000);  // #0556FF
       vec3 color4 = vec3(1.000, 0.756, 0.075);  // #FFC11F
       vec3 color3 = vec3(0.518, 0.094, 0.937);  // #8424EF
-      vec3 color1 = vec3(0.110, 0.110, 0.110);  // #3DEF96
+      vec3 color1 = vec3(0.239, 0.929, 0.588);  // #3DEF96
       vec3 color6 = vec3(0.110, 0.110, 0.110);  // #252525
-      vec3 color2 = vec3(0.961, 0.961, 0.957);  // #F5F5F4
+      vec3 color5 = vec3(0.961, 0.961, 0.957);  // #F5F5F4
   
       // Interpolating colors based on dissolveValue
       vec3 selectedColor;
@@ -340,7 +340,7 @@ const DissolveTransition = () => {
   // Load the dissolve texture
   useEffect(() => {
     const textureLoader = new THREE.TextureLoader();
-    textureLoader.load('/img/eduard-semashko-flame-wall-1.jpg', (texture) => {
+    textureLoader.load('/img/OfGVNqG.png', (texture) => {
       shaderRef.current.uniforms.u_dissolveTexture.value = texture;
     });
   }, []);

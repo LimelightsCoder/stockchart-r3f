@@ -212,10 +212,10 @@ font-display: swap;
   transform-origin: center;
   width: var(--blob-size);
   height: var(--blob-size);
-  position: absolute;
+  position: fixed;
   bottom: 10%;
   left: 10%;
-  transform: translate(-50%, -50%); /* Centers the element */
+  /* transform: translate(-50%, -50%);  */
   overflow: visible;
   -webkit-filter: url("#goo");
   filter: url("#goo");

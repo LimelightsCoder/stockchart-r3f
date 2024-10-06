@@ -47,7 +47,7 @@ const Experience2 = () => {
           adaptationRate={1.0}
         /> */}
           <Pixelation
-            granularity={16} // pixel granularity
+            granularity={12} // pixel granularity
           />
     {/* <Grid
     blendFunction={BlendFunction.COLOR_DODGE} // blend mode

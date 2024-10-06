@@ -141,7 +141,7 @@ export default function Page() {
           </div>
           <div className="border rounded-sm p-4 text-white" style={{ height: '300px' }}>
             <Image
-              src="/img/IMG_8321.jpg"
+              src="/img/IMG_0144.jpg"
               width={0}
               height={0}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"

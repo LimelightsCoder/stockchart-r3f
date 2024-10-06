@@ -90,7 +90,7 @@ const Footer = () => {
        {notification && <div className={`notification`}>{notification}</div>} 
       </div>
         {/* <Avatar /> */}
-        <Image
+        {/* <Image
   src="/img/Avatar2.png"
   width={0}
   height={0}
@@ -102,7 +102,7 @@ const Footer = () => {
     objectFit: 'cover'   // Maintain the cover behavior
   }} 
   alt="Picture of the author"
-/>
+/> */}
 
       <h1 className='w-full text-3xl lg:text-4xl xl:text-5xl font-bold text-white uppercase mt-8 text-start pointer-events-none select-none'>
         &copy; Cory Parrish

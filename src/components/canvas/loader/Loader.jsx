@@ -276,7 +276,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
   const [isAnimating, setIsAnimating] = useState(false); // State to control pixel animation
   const [showPixelTransition, setShowPixelTransition] = useState(false); // Control the pixelation shader
   const [pixelSize, setPixelSize] = useState(1); // Initialize pixel size for smooth transition
-
+  const isMobile = window.innerWidth <= 768;
 
   useEffect(() => {
     const interval = 100; // Update progress every 100 ms
@@ -330,13 +330,15 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               <pointLight position={[5, 5, 5]} />
               {/* <RotatingCube progress={displayProgress} /> */}
               <EffectComposer>
+              {!isMobile && (
+                <>
                 <Pixelation granularity={4} />
-                {/* <Noise opacity={0.05} /> */}
+                
                 <DotScreen
-    blendFunction={BlendFunction.COLOR_DODGE} // blend mode
-    angle={Math.PI * 0.5} // angle of the dot pattern
-    scale={25.0} // scale of the dot pattern
-  />
+                  blendFunction={BlendFunction.COLOR_DODGE} // blend mode
+                  angle={Math.PI * 0.5} // angle of the dot pattern
+                  scale={25.0} // scale of the dot pattern
+                />
                 <Bloom
                   luminanceThreshold={0}
                   luminanceSmoothing={0.9}
@@ -346,6 +348,18 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                   kernelSize={KernelSize.LARGE} // blur kernel size
                   mipmapBlur={false} // Enables or disables mipmap blur.
                 />
+                  </>
+                )}
+                {isMobile && (
+                   <>
+                    <Pixelation granularity={4} />
+                    <DotScreen
+                  blendFunction={BlendFunction.COLOR_DODGE} 
+                  angle={Math.PI * 0.5}
+                  scale={25.0} 
+                />
+                </>
+                  )}
               </EffectComposer>
 
               {/* Animated Text */}

@@ -121,33 +121,37 @@ const Layout = ({ children }) => {
 
   return (
     <>
-    {loading && <Loader started={loading} onStarted={handleLoadingStarted} />}
-    <div
-      ref={ref}
-      style={{
-        position: 'relative',
-        width: ' 100%',
-        height: '100%',
-        overflow: 'hidden',
-        touchAction: 'auto',
-        //mixBlendMode:'difference'
-      }}
-    >
-      {children}
-      <Scene
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100vw',
-          height: '100vh',
-          pointerEvents: 'none',
-        }}
-        eventSource={ref}
-        eventPrefix='client'
-      />
-    </div>
+      {loading && (
+        <Loader started={loading} onStarted={handleLoadingStarted} />
+      )}
+      {!loading && ( // Render the Scene only after loading is done
+        <div
+          ref={ref}
+          style={{
+            position: 'relative',
+            width: '100%',
+            height: '100%',
+            overflow: 'hidden',
+            touchAction: 'auto',
+          }}
+        >
+          {children}
+          <Scene
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              width: '100vw',
+              height: '100vh',
+              pointerEvents: 'none',
+            }}
+            eventSource={ref}
+            eventPrefix="client"
+          />
+        </div>
+      )}
     </>
+
   )
 }
 

@@ -6,10 +6,10 @@ export const OPTS = {
     distortion: 0.4,
     curl: 1.9,
     radius: 0.3,
-    swirl: 4,
+    swirl: 2,
 
-    pressure: 0.8,
-    densityDissipation: 0.96,
+    pressure: 0.9,
+    densityDissipation: 0.98,
     velocityDissipation: 1.0,
 
     fluidColor: '#3300ff',

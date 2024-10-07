@@ -8,7 +8,7 @@ import Projects from '@/components/dom/projects'
 import WordSplit from '@/components/dom/textSplit/WordSplit'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
-import { Suspense, useState } from 'react'
+import { Suspense, useState, useEffect } from 'react'
 const CurrentTime = dynamic(() => import('@/components/dom/utils/CurrentTime'), { ssr: false });
 const Glass = dynamic(() => import('@/components/canvas/glass/Glass').then((mod) => mod.Logo), { ssr: false })
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
@@ -33,6 +33,10 @@ const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mo
 
 export default function Page() {
   const [menuIsActive, setMenuIsActive] = useState(false);
+
+
+  
+  
 
   
   const HeroParagraph = `I am a developer and designer with a multicultural background, having lived in diverse locations such as New York and California, currently working as an independent creative.`;
@@ -87,23 +91,23 @@ export default function Page() {
 
           <h2 className="flex w-[96vw] text-[2vw] font-bold uppercase pointer-events-none select-none text-[#5f5f5f]">core tools</h2>
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full gap-4 mb-[100px] pointer-events-none select-none">
-  <div className="p-4 text-white" style={{ height: 'auto' }}>
-    <div style={{ fontSize: '3vw' }}>JavaScript</div>
-    <WordSplit value={Skill1} />
-  </div>
-  <div className="p-4 text-white" style={{ height: 'auto' }}>
-    <div style={{ fontSize: '3vw' }}>WebGL</div>
-    <WordSplit value={Skill2} />
-  </div>
-  <div className="p-4 text-white" style={{ height: 'auto' }}>
-    <div style={{ fontSize: '3vw' }}>Node.js</div>
-    <WordSplit value={Skill3} /> 
-     </div>
-  <div className="p-4 text-white" style={{ height: 'auto' }}>
-    <div style={{ fontSize: '3vw' }}>Prismic.io</div>
-    <WordSplit value={Skill4} />
-      </div>
-</section>
+            <div className="p-4 text-white" style={{ height: 'auto' }}>
+              <div style={{ fontSize: '3vw' }}>JavaScript</div>
+              <WordSplit value={Skill1} />
+            </div>
+            <div className="p-4 text-white" style={{ height: 'auto' }}>
+              <div style={{ fontSize: '3vw' }}>WebGL</div>
+              <WordSplit value={Skill2} />
+            </div>
+            <div className="p-4 text-white" style={{ height: 'auto' }}>
+              <div style={{ fontSize: '3vw' }}>Node.js</div>
+              <WordSplit value={Skill3} /> 
+              </div>
+            <div className="p-4 text-white" style={{ height: 'auto' }}>
+              <div style={{ fontSize: '3vw' }}>Prismic.io</div>
+              <WordSplit value={Skill4} />
+                </div>
+          </section>
 
 
 

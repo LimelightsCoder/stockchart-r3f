@@ -24,7 +24,7 @@ const Experience2 = () => {
           curl={3}
           swirl={3}
           distortion={0.3}
-          force={10}
+          force={2}
           pressure={0.96}
           densityDissipation={0.94}
           velocityDissipation={0.96}

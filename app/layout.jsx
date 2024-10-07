@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
       */}
       <head />
      
-      <body>
+      <body className='relative-container'>
       <Scroll>
         <Layout>
           <MobileMenu />

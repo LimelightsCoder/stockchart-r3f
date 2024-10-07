@@ -334,7 +334,7 @@ const dissolveShader = {
 
 const DissolveTransition = () => {
   const shaderRef = useRef();
-      const planeWidth = window.innerWidth;
+    const planeWidth = window.innerWidth;
     const planeHeight = window.innerHeight;
 
   // Load the dissolve texture

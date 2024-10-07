@@ -67,11 +67,13 @@ font-display: swap;
     background-color: #000000;
     font-family: 'Wotfard-Regular', 'GeneralSans';
     user-select: none;
+    /* mix-blend-mode: difference; */
   }
 }
 
 [data-scroll-container] {
   touch-action: auto; /* Enable native touch gestures on scroll container */
+
 }
 
 

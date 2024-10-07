@@ -159,7 +159,8 @@ void main() {
 
     p.x *= aspectRatio;
 
-    vec3 splat = exp(-dot(p, p) / uRadius) * uColor;
+    vec3 splat = exp(-dot(p, p) / uRadius) * uColor * 2.5;
+
 
     vec3 base = texture2D(uTarget, vUv).xyz;
 
@@ -205,15 +206,17 @@ void main() {
 
     float C = texture2D(uCurl, vUv).x;
 
-    vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) * 0.5;
+    vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) * 2.75;
     force /= length(force) + 1.0;
-    force *= uCurlValue * C;
+    force *= (uCurlValue * C) * 2.5;
     force.y *= -1.0;
 
     vec2 vel = texture2D(uVelocity, vUv).xy;
 
     gl_FragColor = vec4(vel + force * dt, 0.0, 1.0);
 }`;
+
+
 
 export const useMaterials = () => {
     const size = useThree((s) => s.size);
@@ -223,8 +226,8 @@ export const useMaterials = () => {
             uniforms: {
                 uVelocity: { value: new Texture() },
                 uSource: { value: new Texture() },
-                dt: { value: 0.0016 },
-                uDissipation: { value: 1.0 },
+                dt: { value: 0.0098 },
+                uDissipation: { value: 0.95 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here
@@ -285,7 +288,7 @@ export const useMaterials = () => {
                 aspectRatio: { value: size.width / size.height },
                 uColor: { value: new Vector3() },
                 uPointer: { value: new Vector2() },
-                uRadius: { value: OPTS.radius / 100.0 },
+                uRadius: { value: OPTS.radius / 15.0 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here
@@ -297,7 +300,7 @@ export const useMaterials = () => {
                 uVelocity: { value: new Texture() },
                 uCurl: { value: new Texture() },
                 uCurlValue: { value: OPTS.curl },
-                dt: { value: 0.016 },
+                dt: { value: 0.0005 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here

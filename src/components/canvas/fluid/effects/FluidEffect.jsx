@@ -20,8 +20,8 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     vec2 distortedUv = uv - fluidColor.rg * uDistort;
     vec4 texture = texture2D(inputBuffer, distortedUv);
 
-    float intensity = length(fluidColor) * (uIntensity * 1.0);
-    vec3 selectedColor = uColor * length(fluidColor);
+    float intensity = length(fluidColor) * (uIntensity * 4.0);
+    vec3 selectedColor = (uColor*4.0) * length(fluidColor);
     vec4 colorForFluidEffect = vec4(uRainbow == 1.0 ? fluidColor : selectedColor, 1.0);
     vec4 computedBgColor = vec4(uBackgroundColor, 1.0);
 
@@ -54,6 +54,7 @@ export class FluidEffect extends Effect {
             uShowBackground: new Uniform(props.showBackground || false),
             uColor: new Uniform(hexToRgb(props.fluidColor || '#FFFFFF')),
             uBackgroundColor: new Uniform(hexToRgb(props.backgroundColor || '#000000')),
+
         };
 
         super('FluidEffect', fragment, { uniforms: new Map(Object.entries(uniforms)) });
@@ -80,5 +81,6 @@ export class FluidEffect extends Effect {
         this.updateUniform('uShowBackground', this.state.showBackground || false);
         this.updateUniform('uColor', hexToRgb(this.state.fluidColor || '#FFFFFF'));
         this.updateUniform('uBackgroundColor', hexToRgb(this.state.backgroundColor || '#000000'));
+
     }
 }

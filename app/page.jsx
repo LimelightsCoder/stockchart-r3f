@@ -55,7 +55,7 @@ export default function Page() {
       >
         
         {/* Overlay HTML Content */}
-        <div className='relative flex flex-col items-center justify-center  w-full h-full text-white py-20' style={{ pointerEvents: 'none', zIndex:2 }}>
+        <div className='relative flex flex-col items-center justify-center  w-full h-full text-white py-20' style={{ pointerEvents: 'none', zIndex:2, mixBlendMode:'difference' }}>
           {/* Title Section with 100vh height */}
           <div className='flex flex-col items-start justify-center h-screen w-[96vw] text-start py-8'>
           {/* <h1 className='flex relative my-4 text-5xl font-bold leading-tight uppercase'>Cory.dev</h1> */}

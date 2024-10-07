@@ -288,7 +288,7 @@ export const useMaterials = () => {
                 aspectRatio: { value: size.width / size.height },
                 uColor: { value: new Vector3() },
                 uPointer: { value: new Vector2() },
-                uRadius: { value: OPTS.radius / 0.75 },
+                uRadius: { value: OPTS.radius / 0.5 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here

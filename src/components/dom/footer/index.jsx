@@ -46,7 +46,9 @@ const Footer = () => {
   ];
   // JSX structure of the footer
   return (
-    <div className='relative mx-auto py-16 px-4 grid  gap-8 text-gray-300 border-t select-none'>
+    <div className='relative mx-auto py-16 px-4 grid  gap-8 text-gray-300 border-t select-none'
+    style={{zIndex:2, mixBlendMode:'difference'}}
+    >
 
       <div className='flex justify-start items-start mt-6'>
         {/* Mapping over sections and rendering content */}

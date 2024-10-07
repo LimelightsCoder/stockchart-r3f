@@ -258,7 +258,7 @@
 import * as THREE from 'three';
 import { useRef, useEffect } from 'react';
 import { extend, useFrame } from '@react-three/fiber';
-  import { Text } from '@react-three/drei';
+  // import { Text } from '@react-three/drei';
 import { ShaderMaterial } from 'three';
 // Extend Three.js to support shader material
 extend({ ShaderMaterial });
@@ -379,17 +379,16 @@ const DissolveTransition = () => {
         transparent={true} // Ensure transparency for the dissolve effect
       />
     
-              <Text
+              {/* <Text
             position={[0, 0.5, 0]} // Position in 3D space
             fontSize={0.3} // Adjust font size
             color="#ffffff" // Set text color
             anchorX="center" // Center the text
             anchorY="middle" // Center the text
 
-            // Animation properties
           >
          STARTING
-          </Text>
+          </Text> */}
     </mesh>
   );
 };

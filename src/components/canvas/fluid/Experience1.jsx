@@ -22,9 +22,9 @@ const Experience1 = () => {
    <>
 
             <EffectComposer>
-                <Noise opacity={0.05} />
+                {/* <Noise opacity={0.05} /> */}
                 {/* <Pixelation
-            granularity={14} // pixel granularity
+            granularity={2} // pixel granularity
           /> */}
                 <Fluid 
                 curl={1}
@@ -32,11 +32,11 @@ const Experience1 = () => {
                 force={10}  
                 swirl={1}
                 blend={10}
-                pressure={0.92}
+                pressure={0.9}
                 fluidColor='#ffffff'
-                intensity={0.5}
-                densityDissipation={0.92}
-                velocityDissipation={0.92}
+                //intensity={1.5}
+                densityDissipation={0.9}
+                velocityDissipation={0.9}
                 //backgroundColor='#000000' 
                 rainbow={false}
                 showBackground={false}

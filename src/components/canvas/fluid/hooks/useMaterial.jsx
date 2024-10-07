@@ -142,7 +142,7 @@ void main() {
 
     float pressure = (L + R + B + T - divergence) * 0.25;
 
-    gl_FragColor = vec4(pressure, 0.0, 0.0, 1.0);
+    gl_FragColor = vec4(pressure, 0.5, 0.75, 1.0);
 }`;
 
 const splatFrag = `
@@ -178,7 +178,7 @@ uniform float dt;
 uniform float uDissipation;
 
 void main() {
-    vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize;
+    vec2 coord = vUv - dt * texture2D(uVelocity, vUv).xy * texelSize * 0.75;
 
     gl_FragColor = uDissipation * texture2D(uSource, coord);
     gl_FragColor.a = 1.0;
@@ -206,7 +206,7 @@ void main() {
 
     float C = texture2D(uCurl, vUv).x;
 
-    vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) * 0.75;
+    vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) ;
     force /= length(force) + 1.0;
     force *= (uCurlValue * C) * 2.5;
     force.y *= -1.0;
@@ -226,8 +226,8 @@ export const useMaterials = () => {
             uniforms: {
                 uVelocity: { value: new Texture() },
                 uSource: { value: new Texture() },
-                dt: { value: 0.0022 },
-                uDissipation: { value: 0.95 },
+                dt: { value: 0.018 },
+                uDissipation: { value: 0.92 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here
@@ -288,7 +288,7 @@ export const useMaterials = () => {
                 aspectRatio: { value: size.width / size.height },
                 uColor: { value: new Vector3() },
                 uPointer: { value: new Vector2() },
-                uRadius: { value: OPTS.radius / 0.5 },
+                uRadius: { value: OPTS.radius / 0.25 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here

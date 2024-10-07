@@ -242,8 +242,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { EffectComposer, Pixelation, Noise, Bloom } from '@react-three/postprocessing';
-import { KernelSize } from "postprocessing";
+import { EffectComposer, Pixelation, Noise, Bloom, DotScreen } from '@react-three/postprocessing';
+import { KernelSize, BlendFunction } from "postprocessing";
 import { Text } from '@react-three/drei'; // Import Text from drei
 import styles from './style.module.scss'; // Ensure this CSS module exists
 
@@ -332,6 +332,11 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               <EffectComposer>
                 <Pixelation granularity={4} />
                 {/* <Noise opacity={0.05} /> */}
+                <DotScreen
+    blendFunction={BlendFunction.COLOR_DODGE} // blend mode
+    angle={Math.PI * 0.5} // angle of the dot pattern
+    scale={10.0} // scale of the dot pattern
+  />
                 <Bloom
                   luminanceThreshold={0}
                   luminanceSmoothing={0.9}

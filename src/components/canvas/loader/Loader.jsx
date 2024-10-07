@@ -335,7 +335,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                 <DotScreen
     blendFunction={BlendFunction.COLOR_DODGE} // blend mode
     angle={Math.PI * 0.5} // angle of the dot pattern
-    scale={10.0} // scale of the dot pattern
+    scale={25.0} // scale of the dot pattern
   />
                 <Bloom
                   luminanceThreshold={0}

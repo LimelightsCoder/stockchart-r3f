@@ -33,7 +33,7 @@ const Experience1 = () => {
                 swirl={1}
                 blend={10}
                 pressure={0.92}
-                fluidColor='#fffff'
+                fluidColor='#ffffff'
                 intensity={1.5}
                 densityDissipation={0.9}
                 velocityDissipation={0.9}
@@ -41,12 +41,12 @@ const Experience1 = () => {
                 rainbow={false}
                 showBackground={false}
                 />
-               {/* <Grid
-            //blendFunction={BlendFunction.NORMAL} // blend mode
-            scale={1.0} // grid pattern scale
-            lineWidth={0.001} // grid pattern line width
+               <Grid
+            blendFunction={BlendFunction.NORMAL} // blend mode
+            scale={20.0} // grid pattern scale
+            lineWidth={1.00} // grid pattern line width
             size={{ Width, Height }} // overrides the default pass width and height
-          />  */}
+          /> 
                 {/* <ToneMapping 
                 blendFunction={BlendFunction.DIFFERENCE} 
                 middleGrey={0} 

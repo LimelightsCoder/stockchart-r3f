@@ -356,7 +356,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                     <DotScreen
                   blendFunction={BlendFunction.COLOR_DODGE} 
                   angle={Math.PI * 0.5}
-                  scale={25.0} 
+                  scale={25.0}
                 />
                 </>
                   )}

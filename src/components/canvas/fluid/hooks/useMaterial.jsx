@@ -206,7 +206,7 @@ void main() {
 
     float C = texture2D(uCurl, vUv).x;
 
-    vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) * 2.75;
+    vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) * 0.75;
     force /= length(force) + 1.0;
     force *= (uCurlValue * C) * 2.5;
     force.y *= -1.0;
@@ -288,7 +288,7 @@ export const useMaterials = () => {
                 aspectRatio: { value: size.width / size.height },
                 uColor: { value: new Vector3() },
                 uPointer: { value: new Vector2() },
-                uRadius: { value: OPTS.radius / 15.0 },
+                uRadius: { value: OPTS.radius / 0.75 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here

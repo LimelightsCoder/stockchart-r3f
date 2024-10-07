@@ -23,9 +23,9 @@ const Experience1 = () => {
 
             <EffectComposer>
                 <Noise opacity={0.05} />
-                <Pixelation
-            granularity={12} // pixel granularity
-          />
+                {/* <Pixelation
+            granularity={16} // pixel granularity
+          /> */}
                 <Fluid 
                 curl={1}
                 radius={0.15}
@@ -35,10 +35,10 @@ const Experience1 = () => {
                 pressure={0.92}
                 fluidColor='#ffffff'
                 intensity={0.5}
-                densityDissipation={0.9}
-                velocityDissipation={0.9}
+                densityDissipation={0.92}
+                velocityDissipation={0.92}
                 //backgroundColor='#000000' 
-                rainbow={true}
+                rainbow={false}
                 showBackground={false}
                 />
                {/* <Grid

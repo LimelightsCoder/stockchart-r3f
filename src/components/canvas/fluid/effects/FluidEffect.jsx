@@ -20,8 +20,8 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     vec2 distortedUv = uv - fluidColor.rg * uDistort;
     vec4 texture = texture2D(inputBuffer, distortedUv);
 
-    float intensity = length(fluidColor) * (uIntensity * 4.0);
-    vec3 selectedColor = (uColor*4.0) * length(fluidColor);
+    float intensity = length(fluidColor) * (uIntensity * 1.0);
+    vec3 selectedColor = (uColor*2.0) * length(fluidColor);
     vec4 colorForFluidEffect = vec4(uRainbow == 1.0 ? fluidColor : selectedColor, 1.0);
     vec4 computedBgColor = vec4(uBackgroundColor, 1.0);
 

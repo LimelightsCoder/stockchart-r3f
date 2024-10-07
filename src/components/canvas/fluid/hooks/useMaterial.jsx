@@ -226,7 +226,7 @@ export const useMaterials = () => {
             uniforms: {
                 uVelocity: { value: new Texture() },
                 uSource: { value: new Texture() },
-                dt: { value: 0.0098 },
+                dt: { value: 0.0022 },
                 uDissipation: { value: 0.95 },
                 texelSize: { value: new Vector2() },
             },

@@ -388,7 +388,7 @@ const DissolveTransition = () => {
 
             // Animation properties
           >
-         CORY.DEV
+         STARTING
           </Text>
     </mesh>
   );

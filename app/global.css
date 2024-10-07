@@ -186,8 +186,6 @@ font-display: swap;
   transition: width 0.1s ease;
 }
 
-/* LOADER CONTAINER */
-
 
 
 
@@ -203,39 +201,34 @@ font-display: swap;
   }
 }
 
-.loader svg {
-  animation: spin-scale 2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
-  transform-box: fill-box;
-  transform-origin: center;
-  width: 50px;
-  height: 50px;
+.loaderContainer {
   position: fixed;
   bottom: 10%;
   left: 10%;
-  /* transform: translate(-50%, -50%);  */
-  overflow: visible;
-  -webkit-filter: url("#goo");
-  filter: url("#goo");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   z-index: 9999;
 }
 
-.loaderText {
-  position: absolute;
-  /* top: 50vh; */
-  bottom: 10%;
-  left: 3%;
-  /* transform: translate(-50%, -50%); */
-  color: white;
-  font-family: 'Wotfard-Regular', 'GeneralSans';
-  font-size: 30px;
-  user-select: none;
-  z-index: 2001;
+.loader svg {
+  animation: spin-scale 2s cubic-bezier(0.25, 0.1, 0.25, 1) infinite;
+  width: 50px;
+  height: 50px;
 }
 
-.percentage {
+.loaderText .percentage {
+  font-size: 10px;
+  color: #ffffffc1;
+  margin-top: 10px;
+}
+
+
+/* .percentage {
   position: absolute;
   font-size: 10px;
   font-family: 'Wotfard-Regular', 'GeneralSans';
   color: #ffffffc1;
   z-index: 2001;
-}
+} */

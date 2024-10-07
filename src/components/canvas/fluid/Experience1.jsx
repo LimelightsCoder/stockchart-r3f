@@ -23,9 +23,9 @@ const Experience1 = () => {
 
             <EffectComposer>
                 <Noise opacity={0.05} />
-                {/* <Pixelation
+                <Pixelation
             granularity={12} // pixel granularity
-          /> */}
+          />
                 <Fluid 
                 curl={1}
                 radius={0.15}
@@ -34,19 +34,19 @@ const Experience1 = () => {
                 blend={10}
                 pressure={0.92}
                 fluidColor='#ffffff'
-                intensity={1.5}
+                intensity={0.5}
                 densityDissipation={0.9}
                 velocityDissipation={0.9}
                 //backgroundColor='#000000' 
-                rainbow={false}
+                rainbow={true}
                 showBackground={false}
                 />
-               <Grid
-            blendFunction={BlendFunction.NORMAL} // blend mode
+               {/* <Grid
+            //blendFunction={BlendFunction.NORMAL} // blend mode
             scale={20.0} // grid pattern scale
             lineWidth={1.00} // grid pattern line width
             size={{ Width, Height }} // overrides the default pass width and height
-          /> 
+          />  */}
                 {/* <ToneMapping 
                 blendFunction={BlendFunction.DIFFERENCE} 
                 middleGrey={0} 

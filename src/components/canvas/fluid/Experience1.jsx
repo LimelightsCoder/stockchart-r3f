@@ -5,21 +5,15 @@ import {
   ToneMapping,
   Pixelation,
   Grid,
-  SSAO,
-  BrightnessContrast
+  SSAO
 } from "@react-three/postprocessing";
-import {
-  KernelSize,
-  BlendFunction,
-  Resizer
-} from "postprocessing";
 import { Fluid } from './Fluid';
 import { useEffect, useState } from "react";
+import { Leva, useControls } from "leva";
 
 const Experience1 = () => {
-  const Width = window.innerWidth;
-  const Height = window.innerHeight;
   const [isMobile, setIsMobile] = useState(false);
+  const [activeScene, setActiveScene] = useState(1); // Track active scene
 
   // Set mobile state based on window size
   useEffect(() => {
@@ -38,47 +32,48 @@ const Experience1 = () => {
   // Define the cursor radius based on device
   const cursorRadius = isMobile ? 0.085 : 0.15;
 
+  // Leva control for scene switching
+  // const { scene } = useControls({
+  //   scene: {
+  //     value: 1, // Default to scene 1
+  //     options: { Scene1: 1, Scene2: 2 }, // Scene switcher options
+  //   },
+  // });
+
+  // // Update the active scene whenever scene control is changed
+  // useEffect(() => {
+  //   setActiveScene(scene); // Update the active scene based on the control
+  // }, [scene]);
 
   return (
-   <>
+    <>
+     
 
-            <EffectComposer>
+      <EffectComposer>
+        <>
+          {/* Pass activeScene prop to Fluid component to handle scene switching */}
+          <Fluid
+            activeScene={activeScene} // Pass the current active scene to Fluid
+            curl={0.75}
+            radius={cursorRadius}
+            force={10}
+            swirl={0.75}
+            blend={10}
+            pressure={0.9}
+            fluidColor={activeScene === 1 ? '#ffffff' : '#0000ff'} // Change fluid color based on scene
+            intensity={1.5}
+            densityDissipation={0.9}
+            velocityDissipation={0.9}
+            rainbow={false}
+            showBackground={false}
+          />
+           <Pixelation
+            granularity={12} // pixel granularity
+          />
+        </>
+      </EffectComposer>
+    </>
+  );
+};
 
-                <>
-                {/* <Noise opacity={0.05} /> */}
-                {/* <Pixelation
-            granularity={4} // pixel granularity
-          /> */}
-                <Fluid 
-                curl={0.75}
-                radius={cursorRadius}
-                force={10}  
-                swirl={0.75}
-                blend={10}
-                pressure={0.9}
-                fluidColor='#ffffff'
-                intensity={1.5}
-                densityDissipation={0.9}
-                velocityDissipation={0.9}
-                //backgroundColor='#000000' 
-                rainbow={false}
-                showBackground={false}
-                />
-               {/* <Grid
-            //blendFunction={BlendFunction.NORMAL} // blend mode
-            scale={20.0} // grid pattern scale
-            lineWidth={1.00} // grid pattern line width
-            size={{ Width, Height }} // overrides the default pass width and height
-          />  */}
-                {/* <ToneMapping 
-                blendFunction={BlendFunction.DIFFERENCE} 
-                middleGrey={0} 
-                maxLuminance={0} /> */}
-                 </>
-
-            </EffectComposer>
-   </>
-  )
-}
-
-export default Experience1
+export default Experience1;

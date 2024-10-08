@@ -6,6 +6,7 @@ import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { Effect as FluidEffect } from './effects/Fluid';
 import { useFBOs } from './hooks/useFBOs';
 import { useMaterials } from './hooks/useMaterial';
+
 import { OPTS } from './constant';
 import { usePointer } from './hooks/usePointer';
 
@@ -30,6 +31,8 @@ export const Fluid = ({
 
   const bufferScene = useMemo(() => new Scene(), []);
   const bufferCamera = useMemo(() => new Camera(), []);
+
+  
 
   const meshRef = useRef(null);
   const postRef = useRef(null);

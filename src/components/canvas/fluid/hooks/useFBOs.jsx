@@ -41,6 +41,13 @@ export const useFBOs = () => {
         depth: false,
     });
 
+    const scene2FBO = useFBO(OPTS.simRes, OPTS.simRes, {
+        type: THREE.HalfFloatType,
+        format: THREE.RGBAFormat,
+        minFilter: THREE.LinearFilter,
+        depth: false,
+    });
+
     const FBOs = useMemo(() => {
         return {
             density,
@@ -48,8 +55,9 @@ export const useFBOs = () => {
             pressure,
             divergence,
             curl,
+            scene2FBO,
         };
-    }, [curl, density, divergence, pressure, velocity]);
+    }, [curl, density, divergence, pressure, velocity, scene2FBO]);
 
     useEffect(() => {
         return () => {

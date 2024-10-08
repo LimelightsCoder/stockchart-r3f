@@ -7,6 +7,9 @@ import {
   Grid,
   SSAO
 } from "@react-three/postprocessing";
+import {
+  BlendFunction,
+} from "postprocessing";
 import { Fluid } from './Fluid';
 import { useEffect, useState } from "react";
 import { Leva, useControls } from "leva";
@@ -14,6 +17,8 @@ import { Leva, useControls } from "leva";
 const Experience1 = () => {
   const [isMobile, setIsMobile] = useState(false);
   const [activeScene, setActiveScene] = useState(1); // Track active scene
+  const Width = window.innerWidth;
+  const Height = window.innerHeight;
 
   // Set mobile state based on window size
   useEffect(() => {
@@ -50,8 +55,7 @@ const Experience1 = () => {
      
 
       <EffectComposer>
-        <>
-          {/* Pass activeScene prop to Fluid component to handle scene switching */}
+
           <Fluid
             activeScene={activeScene} // Pass the current active scene to Fluid
             curl={0.75}
@@ -67,10 +71,17 @@ const Experience1 = () => {
             rainbow={false}
             showBackground={false}
           />
-           <Pixelation
-            granularity={12} // pixel granularity
+           {/* <Pixelation
+            granularity={10}
+          /> */}
+          <Grid
+            blendFunction={BlendFunction.COLOR_DODGE} // blend mode
+            scale={0.005} // increase the scale to make grid lines less visible
+            lineWidth={0.01} // reduce the line width to make it almost unnoticeable
+            size={{ Width, Height }} // overrides the default pass width and height
+            opacity={0.0}
           />
-        </>
+
       </EffectComposer>
     </>
   );

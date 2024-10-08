@@ -23,8 +23,7 @@ const Experience1 = () => {
    <>
 
             <EffectComposer>
-            {!isMobile && (
-                <>
+
                 {/* <Noise opacity={0.05} /> */}
                 <Pixelation
             granularity={4} // pixel granularity
@@ -54,30 +53,7 @@ const Experience1 = () => {
                 blendFunction={BlendFunction.DIFFERENCE} 
                 middleGrey={0} 
                 maxLuminance={0} /> */}
-                 </>
-                )}
-                {isMobile && (
-                   <>
-                <Fluid 
-                curl={1}
-                radius={0.15}
-                force={5}  
-                swirl={1}
-                blend={10}
-                pressure={0.9}
-                fluidColor='#ffffff'
-                //intensity={1.5}
-                densityDissipation={0.9}
-                velocityDissipation={0.9}
-                //backgroundColor='#000000' 
-                rainbow={false}
-                showBackground={false}
-                />
-                   <Pixelation
-            granularity={4} // pixel granularity
-          />
-                   </>
-                  )}
+
             </EffectComposer>
    </>
   )

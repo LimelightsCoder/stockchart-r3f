@@ -1,42 +1,64 @@
+'use client'
 import {
   EffectComposer,
-  // Noise,
-  // ToneMapping,
+  Noise,
+  ToneMapping,
   Pixelation,
-  // Grid,
-  // SSAO,
-  // BrightnessContrast
+  Grid,
+  SSAO,
+  BrightnessContrast
 } from "@react-three/postprocessing";
-// import {
-//   KernelSize,
-//   BlendFunction,
-//   Resizer
-// } from "postprocessing";
+import {
+  KernelSize,
+  BlendFunction,
+  Resizer
+} from "postprocessing";
 import { Fluid } from './Fluid';
+import { useEffect, useState } from "react";
 
 const Experience1 = () => {
-  // const isMobile = window.innerWidth <= 768;
   const Width = window.innerWidth;
   const Height = window.innerHeight;
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Set mobile state based on window size
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    // Check the window size on mount and on resize
+    handleResize();
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup listener on unmount
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // Define the cursor radius based on device
+  const cursorRadius = isMobile ? 0.085 : 0.15;
+
 
   return (
    <>
 
             <EffectComposer>
+
+                <>
                 {/* <Noise opacity={0.05} /> */}
-                <Pixelation
+                {/* <Pixelation
             granularity={4} // pixel granularity
-          />
+          /> */}
                 <Fluid 
-                curl={1}
-                radius={0.1}
+                curl={0.75}
+                radius={cursorRadius}
                 force={10}  
-                swirl={1}
+                swirl={0.75}
                 blend={10}
-                pressure={0.92}
+                pressure={0.9}
                 fluidColor='#ffffff'
-                //intensity={1.5}
-                densityDissipation={0.88}
+                intensity={1.5}
+                densityDissipation={0.9}
                 velocityDissipation={0.9}
                 //backgroundColor='#000000' 
                 rainbow={false}
@@ -52,6 +74,7 @@ const Experience1 = () => {
                 blendFunction={BlendFunction.DIFFERENCE} 
                 middleGrey={0} 
                 maxLuminance={0} /> */}
+                 </>
 
             </EffectComposer>
    </>

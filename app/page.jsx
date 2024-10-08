@@ -10,7 +10,7 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense, useState, useEffect } from 'react'
 const CurrentTime = dynamic(() => import('@/components/dom/utils/CurrentTime'), { ssr: false });
-const Glass = dynamic(() => import('@/components/canvas/glass/Glass').then((mod) => mod.Logo), { ssr: false })
+const Glass = dynamic(() => import('@/components/canvas/glass/Glass'), { ssr: false })
 const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
 const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
 const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })

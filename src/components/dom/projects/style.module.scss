@@ -67,6 +67,16 @@
     .cursorLabel{
         background-color: transparent;
     }
-    
+    .launchButton {
+        pointer-events: none; // Disable pointer events by default
+        z-index: 10; // Ensure the button is on top
+        // Add any other button styles you want here
+      
+        // When hovered, enable pointer events
+        &:hover {
+          pointer-events: auto; // Enable pointer events on hover
+        }
+      }
+      
     
 }

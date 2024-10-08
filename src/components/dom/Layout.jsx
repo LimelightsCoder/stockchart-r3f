@@ -37,7 +37,7 @@ const Layout = ({ children }) => {
     // useEffect(() => {
     //   let svg, rects = [];
     //   const numberOfSections = 4; // Number of sections
-    //   const fillColor = '#00000011'; // Color for the sections
+    //   const fillColor = '#ff000011'; // Color for the sections
     
     //   function createSvg() {
     //     const width = window.innerWidth;
@@ -52,7 +52,7 @@ const Layout = ({ children }) => {
     //     svg.style.position = 'fixed';
     //     svg.style.top = '0';
     //     svg.style.left = '0';
-    //     svg.style.zIndex = '0';
+    //     svg.style.zIndex = '2';
     //     svg.style.pointerEvents = 'none';
     //     svg.style.touchAction = 'none';
     
@@ -63,7 +63,7 @@ const Layout = ({ children }) => {
     
     //     // Apply a blend mode (like 'screen' or 'difference')
     //     const feBlend = document.createElementNS('http://www.w3.org/2000/svg', 'feBlend');
-    //     feBlend.setAttribute('mode', 'color-dodge'); // Try 'difference', 'multiply', 'screen', etc.
+    //     feBlend.setAttribute('mode', 'difference'); // Try 'difference', 'multiply', 'screen', etc.
     //     feBlend.setAttribute('in', 'SourceGraphic');
     //     feBlend.setAttribute('in2', 'BackgroundImage');
     //     filter.appendChild(feBlend);

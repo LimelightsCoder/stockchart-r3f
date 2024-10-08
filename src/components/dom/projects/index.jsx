@@ -5,23 +5,27 @@ import Project from './components/project';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import Image from 'next/image';
+import Link from 'next/link';
 import Rounded from '../utils/RoundedButton';
 
 const projects = [
   {
     title: "NYC Live",
     src: "nycsavee.png",
-    color: "#EFE8D300"
+    color: "#EFE8D300",
+    link: "https://nyclive.vercel.app/"
   },
   {
     title: "BMC Improv",
     src: "bmcsavee.png",
-    color: "#EFE8D300"
+    color: "#EFE8D300",
+    link: "https://nyclive.vercel.app/"
   },
   {
     title: "SNG Official",
     src: "sgnsavee.png",
-    color: "#EFE8D300"
+    color: "#EFE8D300",
+    link: "https://nyclive.vercel.app/"
   },
 //   {
 //     title: "Silencio",
@@ -107,7 +111,12 @@ export default function Projects() {
             </div>
         </motion.div>
         <motion.div ref={cursor} className={styles.cursor} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}></motion.div>
-        <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>Launch</motion.div>
+        <motion.div ref={cursorLabel} className={styles.cursorLabel} variants={scaleAnimation} initial="initial" animate={active ? "enter" : "closed"}>
+  <Link href={projects[index]?.link} target="_blank" rel="noopener noreferrer" className={styles.launchButton}>
+    Launch
+  </Link>
+</motion.div>
+
     </>
   </main>
   )

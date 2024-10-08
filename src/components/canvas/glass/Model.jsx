@@ -24,12 +24,12 @@
     
 //     return (
 //         <group scale={viewport.width / 3.75} >
-//             <Text font={'/fonts/Wotfard-Regular.otf'} position={[0, 0, -1]} fontSize={0.5} color="white" anchorX="center" anchorY="middle">
+//             <Text font={'/fonts/Wotfard-Regular.otf'} position={[0, 1.5, -1]} fontSize={0.5} color="white" anchorX="center" anchorY="middle">
 //                 cory.dev
 //             </Text>
-//             <mesh ref={mesh} geometry={nodes.Curve.geometry} position={[-0.30,-0.5,0]} rotation={[Math.PI / 2, 0, 0]} scale={5}>
+//             {/* <mesh ref={mesh} geometry={nodes.Curve.geometry} position={[-0.30,-0.5,0]} rotation={[Math.PI / 2, 0, 0]} scale={5}>
 //                 <MeshTransmissionMaterial {...materialProps}/>
-//             </mesh>
+//             </mesh> */}
 //         </group>
 //     )
 // }

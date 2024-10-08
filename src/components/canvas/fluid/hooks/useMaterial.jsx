@@ -208,12 +208,15 @@ void main() {
 
     vec2 force = vec2(abs(T) - abs(B), abs(R) - abs(L)) ;
     force /= length(force) + 1.0;
-    force *= (uCurlValue * C) * 2.5;
+    force *= (uCurlValue * C) * 2.0; // Scale down to reduce sharpness
     force.y *= -1.0;
 
     vec2 vel = texture2D(uVelocity, vUv).xy;
 
-    gl_FragColor = vec4(vel + force * dt, 0.0, 1.0);
+    // Introduce trailing decay
+    vel = mix(vel, vel + force * dt, 0.5); // Softly blend new velocity
+
+    gl_FragColor = vec4(vel, 1.0, 1.0);
 }`;
 
 
@@ -226,8 +229,8 @@ export const useMaterials = () => {
             uniforms: {
                 uVelocity: { value: new Texture() },
                 uSource: { value: new Texture() },
-                dt: { value: 0.018 },
-                uDissipation: { value: 0.92 },
+                dt: { value: 0.014 },
+                uDissipation: { value: 0.25 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here
@@ -288,7 +291,7 @@ export const useMaterials = () => {
                 aspectRatio: { value: size.width / size.height },
                 uColor: { value: new Vector3() },
                 uPointer: { value: new Vector2() },
-                uRadius: { value: OPTS.radius / 0.25 },
+                uRadius: { value: OPTS.radius / 2.0 },
                 texelSize: { value: new Vector2() },
             },
             vertexShader: baseVertex, // Add vertex shader here

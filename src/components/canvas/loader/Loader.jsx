@@ -277,6 +277,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
   const [showPixelTransition, setShowPixelTransition] = useState(false); // Control the pixelation shader
   const [pixelSize, setPixelSize] = useState(1); // Initialize pixel size for smooth transition
   const isMobile = window.innerWidth <= 768;
+  //const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const interval = 100; // Update progress every 100 ms
@@ -301,6 +302,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               if (prev >= 50) { // Set max pixel size for full effect
                 clearInterval(pixelInterval);
                 setTimeout(() => {
+                  //setScale(1.25);
                   onStarted(); // Trigger final start
                 }, 800); // Delay to let the effect complete
                 return prev;
@@ -309,7 +311,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             });
           }, 100); // Update every 100ms for smooth transition
 
-        }, 50); // Wait a bit before starting transition
+        }, 20); // Wait a bit before starting transition
       }
     }, interval);
 
@@ -323,6 +325,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
           className="loading-screen"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0, transition: { duration: 0.5 } }}
+          //style={{ scale }}
         >
           <div className="webgl-canvas-container">
             <Canvas>

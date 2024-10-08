@@ -1,7 +1,9 @@
 'use client'
+import dynamic from 'next/dynamic'
+
 import Image from 'next/image';
 import Link from 'next/link';
-import {useState} from 'react';
+import {useState, Suspense} from 'react';
 import {
   FaDribbbleSquare,
   FaFacebookSquare,
@@ -15,6 +17,7 @@ const SocialIcon = ({ icon: Icon }) => (
     // eslint-disable-next-line tailwindcss/no-custom-classname
   <Icon className="social-icon hover:cursor-pointer z-10" size={30} />
 );
+
 // Footer component
 const Footer = () => {
     const [notification, setNotification] = useState(''); // Add state for notification
@@ -111,6 +114,7 @@ const Footer = () => {
       <div className='absolute flex   right-4 bottom-4'>
             <svg width="5vw" height="5vh" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clipPath="url(#clip0_116_153)"> <path d="M100 0C103.395 53.7596 146.24 96.6052 200 100C146.24 103.395 103.395 146.24 100 200C96.6052 146.24 53.7596 103.395 0 100C53.7596 96.6052 96.6052 53.7596 100 0Z" fill="url(#paint0_linear_116_153)"/> </g> <defs> <linearGradient id="paint0_linear_116_153" x1="100" y1="0" x2="100" y2="200" gradientUnits="userSpaceOnUse"> <stop stopColor="#ffffff"/> <stop offset="1" stopColor="#ffffff"/> </linearGradient> <clipPath id="clip0_116_153"> <rect width="200" height="200" fill="white"/> </clipPath> </defs> </svg>
             </div>
+            
     </div>
   );
 };

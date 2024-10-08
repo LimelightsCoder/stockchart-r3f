@@ -30,7 +30,7 @@ const Experience1 = () => {
   }, []);
 
   // Define the cursor radius based on device
-  const cursorRadius = isMobile ? 0.085 : 0.15;
+  const cursorRadius = isMobile ? 0.075 : 0.15;
 
   // Leva control for scene switching
   // const { scene } = useControls({

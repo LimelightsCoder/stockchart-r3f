@@ -372,6 +372,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
             color="#ffffff" // Set text color
             anchorX="center" // Center the text
             anchorY="middle" // Center the text
+            font={'/fonts/Wotfard-Regular.otf'}
             // Animate scale based on progress
             scale={[1 + (displayProgress / 100) * 0.5, 1 + (displayProgress / 100) * 0.5, 1]}
             // Animation properties

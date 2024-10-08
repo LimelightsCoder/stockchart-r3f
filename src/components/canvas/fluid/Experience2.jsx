@@ -4,7 +4,8 @@ import {
   ToneMapping,
   Pixelation,
   Grid,
-  SSAO
+  SSAO,
+  // N8AO
 } from "@react-three/postprocessing";
 import {
   KernelSize,
@@ -50,6 +51,7 @@ const Experience2 = () => {
           <Pixelation
             granularity={12} // pixel granularity
           />
+          {/* <N8AO aoRadius={1} intensity={2} /> */}
     {/* <Grid
     blendFunction={BlendFunction.COLOR_DODGE} // blend mode
     scale={1.0} // grid pattern scale

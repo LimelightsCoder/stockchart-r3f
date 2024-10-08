@@ -5,7 +5,8 @@ import {
   ToneMapping,
   Pixelation,
   Grid,
-  SSAO
+  SSAO,
+  N8AO
 } from "@react-three/postprocessing";
 import {
   BlendFunction,
@@ -35,7 +36,7 @@ const Experience1 = () => {
   }, []);
 
   // Define the cursor radius based on device
-  const cursorRadius = isMobile ? 0.075 : 0.15;
+  const cursorRadius = isMobile ? 0.055 : 0.15;
 
   // Leva control for scene switching
   // const { scene } = useControls({
@@ -74,13 +75,7 @@ const Experience1 = () => {
            <Pixelation
             granularity={10}
           />
-          {/* <Grid
-            blendFunction={BlendFunction.NORMAL} // blend mode
-            scale={0.005} // increase the scale to make grid lines less visible
-            lineWidth={0.01} // reduce the line width to make it almost unnoticeable
-            size={{ Width, Height }} // overrides the default pass width and height
-            opacity={0.0}
-          /> */}
+          
 
       </EffectComposer>
     </>

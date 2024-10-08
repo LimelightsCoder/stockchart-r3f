@@ -75,7 +75,7 @@ const Experience1 = () => {
             granularity={10}
           /> */}
           <Grid
-            blendFunction={BlendFunction.COLOR_DODGE} // blend mode
+            blendFunction={BlendFunction.NORMAL} // blend mode
             scale={0.005} // increase the scale to make grid lines less visible
             lineWidth={0.01} // reduce the line width to make it almost unnoticeable
             size={{ Width, Height }} // overrides the default pass width and height

@@ -71,16 +71,16 @@ const Experience1 = () => {
             rainbow={false}
             showBackground={false}
           />
-           {/* <Pixelation
+           <Pixelation
             granularity={10}
-          /> */}
-          <Grid
+          />
+          {/* <Grid
             blendFunction={BlendFunction.NORMAL} // blend mode
             scale={0.005} // increase the scale to make grid lines less visible
             lineWidth={0.01} // reduce the line width to make it almost unnoticeable
             size={{ Width, Height }} // overrides the default pass width and height
             opacity={0.0}
-          />
+          /> */}
 
       </EffectComposer>
     </>

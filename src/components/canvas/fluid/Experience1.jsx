@@ -1,21 +1,21 @@
 import {
   EffectComposer,
-  Noise,
-  ToneMapping,
+  // Noise,
+  // ToneMapping,
   Pixelation,
-  Grid,
-  SSAO,
-  BrightnessContrast
+  // Grid,
+  // SSAO,
+  // BrightnessContrast
 } from "@react-three/postprocessing";
-import {
-  KernelSize,
-  BlendFunction,
-  Resizer
-} from "postprocessing";
+// import {
+//   KernelSize,
+//   BlendFunction,
+//   Resizer
+// } from "postprocessing";
 import { Fluid } from './Fluid';
 
 const Experience1 = () => {
-  const isMobile = window.innerWidth <= 768;
+  // const isMobile = window.innerWidth <= 768;
   const Width = window.innerWidth;
   const Height = window.innerHeight;
 
@@ -23,7 +23,6 @@ const Experience1 = () => {
    <>
 
             <EffectComposer>
-
                 {/* <Noise opacity={0.05} /> */}
                 <Pixelation
             granularity={4} // pixel granularity

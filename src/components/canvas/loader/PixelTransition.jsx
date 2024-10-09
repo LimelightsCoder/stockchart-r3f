@@ -306,7 +306,7 @@ const dissolveShader = {
       vec3 color3 = vec3(0.518, 0.094, 0.937);  // #8424EF
       vec3 color1 = vec3(0.239, 0.929, 0.588);  // #3DEF96
       vec3 color6 = vec3(0.110, 0.110, 0.110);  // #252525
-      vec3 color5 = vec3(0.961, 0.961, 0.957);  // #F5F5F4
+      vec3 color5 = vec3(0.0, 0.0, 0.0);  // #F5F5F4
   
       // Interpolating colors based on dissolveValue
       vec3 selectedColor;
@@ -369,7 +369,7 @@ const DissolveTransition = () => {
 
   return (
     <mesh>
-      <planeGeometry args={[20, 10]} />
+      <planeGeometry args={[26, 10]} />
       <shaderMaterial
         ref={shaderRef}
         attach="material"

@@ -43,7 +43,11 @@ const Footer = () => {
         { name: 'Instagram', href: 'https://www.instagram.com/coryparrish.dev?igsh=MXJxaHN3YWZvaGFzag%3D%3D&utm_source=qr' }
       ]
     },
-    // { type: 'section', title: 'Support', items: ['Pricing', 'Documentation', 'Guides', 'API Status'] },
+     { type: 'section', title: 'Site Map', items: [
+      { name: 'Portfolio', href: '/projects' },
+      { name: 'Archives', href: '/archives' },
+      
+    ] },
     // { type: 'section', title: 'Company', items: ['About', 'Blog', 'Jobs', 'Press', 'Careers'] },
     // { type: 'section', title: 'Legal', items: ['Claim', 'Policy', 'Terms'] },
   ];
@@ -57,8 +61,8 @@ const Footer = () => {
         {/* Mapping over sections and rendering content */}
         {items.map((item, index) => (
           item.type === 'section' ? (
-            <div key={index}>
-              <h6 className="font-medium text-gray-100 text-xl pointer-events-none select-none">{item.title}</h6>
+            <div key={index} className='pl-2'>
+              <h6 className="font-medium text-gray-100 text-xl pointer-events-none select-none pr-2">{item.title}</h6>
               <ul>
                 {/* Mapping over items in each section */}
                 {item.items.map((subItem, subIndex) => (

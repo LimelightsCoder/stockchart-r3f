@@ -77,9 +77,9 @@ const Experience1 = () => {
             granularity={10}
           />
             <ChromaticAberration
-    blendFunction={BlendFunction.NORMAL} // blend mode
-    offset={[0.02, 0.002]} // color offset
-  />
+          blendFunction={BlendFunction.NORMAL} // blend mode
+          offset={[0.0125, 0.00125]} // color offset
+        />
 
       </EffectComposer>
     </>

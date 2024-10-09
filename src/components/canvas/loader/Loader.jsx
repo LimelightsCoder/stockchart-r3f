@@ -251,24 +251,24 @@ import styles from './style.module.scss'; // Ensure this CSS module exists
 import DissolveTransition from './PixelTransition'; // Assuming this is in the same folder
 
 // WebGL Cube component
-const RotatingCube = ({ progress }) => {
-  const meshRef = useRef();
+// const RotatingCube = ({ progress }) => {
+//   const meshRef = useRef();
 
-  useFrame(() => {
-    if (meshRef.current) {
-      // Rotate the cube based on loading progress
-      meshRef.current.rotation.x += 0.01 + (progress / 100) * 0.05;
-      meshRef.current.rotation.y += 0.01 + (progress / 100) * 0.05;
-    }
-  });
+//   useFrame(() => {
+//     if (meshRef.current) {
+//       // Rotate the cube based on loading progress
+//       meshRef.current.rotation.x += 0.01 + (progress / 100) * 0.05;
+//       meshRef.current.rotation.y += 0.01 + (progress / 100) * 0.05;
+//     }
+//   });
 
-  return (
-    <mesh ref={meshRef}>
-      <boxGeometry args={[1, 1, 1]} />
-      <meshBasicMaterial color={new THREE.Color(`#ffffff`)} />
-    </mesh>
-  );
-};
+//   return (
+//     <mesh ref={meshRef}>
+//       <boxGeometry args={[1, 1, 1]} />
+//       <meshBasicMaterial color={new THREE.Color(`#ffffff`)} />
+//     </mesh>
+//   );
+// };
 
 // Loader component
 const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
@@ -377,7 +377,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               {/* Animated Text */}
               <Text
             position={[0, 0, 0]} // Position in 3D space
-            fontSize={0.5} // Adjust font size
+            fontSize={0.45} // Adjust font size
             color="#ffffff" // Set text color
             anchorX="center" // Center the text
             anchorY="middle" // Center the text

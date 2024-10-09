@@ -6,6 +6,7 @@ import Experience2 from '@/components/canvas/fluid/Experience2'
 
 import Projects from '@/components/dom/projects'
 import WordSplit from '@/components/dom/textSplit/WordSplit'
+import Work from '@/components/dom/work'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import { Suspense, useState, useEffect } from 'react'
@@ -85,8 +86,12 @@ export default function Page() {
             {/* <p className="mt-2 text-lg">Selection of demo projects, and experiments.</p> */}
           </section>
           {/* Project Cards Section */}
-          <section className="relative flex" style={{pointerEvents: 'auto',  zIndex: 11, touchAction:'unset'}}>
-            <Projects />
+          <section className="relative flex" style={{pointerEvents: 'auto',  zIndex: 11, 
+            // touchAction:'unset'
+            }}>
+            {/* <Projects /> */}
+<Work/>
+
           </section>
 
           <h2 className="flex w-[96vw] text-[2vw] font-bold uppercase pointer-events-none select-none text-[#5f5f5f]">core tools</h2>

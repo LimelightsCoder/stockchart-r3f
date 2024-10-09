@@ -14,24 +14,18 @@ const Layout = ({ children }) => {
     setLoading(false); // Once loading finishes, hide the loader
   };
 
-    // Use effect to hide body and html while loading
-    useEffect(() => {
-      const html = document.documentElement;
-      const body = document.body;
+  useEffect(() => {
+    if (loading) {
+      document.body.style.overflow = 'hidden !important';
+    } else {
+      document.body.style.overflow = 'auto !important';
+    }
   
-      if (loading) {
-        html.style.overflow = 'hidden'; // Prevent scrolling on html
-        body.style.overflow = 'hidden'; // Prevent scrolling on body
-      } else {
-        html.style.overflow = ''; // Restore overflow
-        body.style.overflow = ''; // Restore overflow
-      }
+    return () => {
+      document.body.style.overflow = 'auto !important';
+    };
+  }, [loading]);
   
-      return () => {
-        html.style.overflow = ''; // Cleanup on unmount
-        body.style.overflow = ''; // Cleanup on unmount
-      };
-    }, [loading]);
 
 
     // useEffect(() => {

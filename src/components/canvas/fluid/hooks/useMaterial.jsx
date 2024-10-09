@@ -219,14 +219,70 @@ void main() {
     gl_FragColor = vec4(vel, 1.0, 1.0);
 }`;
 
+const fxaaFragment = `
+precision highp float;
+
+uniform sampler2D tMap;
+uniform vec2 uResolution;
+varying vec2 vUv;
+
+vec4 fxaa(sampler2D tex, vec2 uv, vec2 resolution) {
+  vec2 pixel = vec2(1) / resolution;
+  vec3 l = vec3(0.299, 0.587, 0.114);
+
+  float lNW = dot(texture2D(tex, uv + vec2(-1, -1) * pixel).rgb, l);
+  float lNE = dot(texture2D(tex, uv + vec2( 1, -1) * pixel).rgb, l);
+  float lSW = dot(texture2D(tex, uv + vec2(-1,  1) * pixel).rgb, l);
+  float lSE = dot(texture2D(tex, uv + vec2( 1,  1) * pixel).rgb, l);
+  float lM  = dot(texture2D(tex, uv).rgb, l);
+  float lMin = min(lM, min(min(lNW, lNE), min(lSW, lSE)));
+  float lMax = max(lM, max(max(lNW, lNE), max(lSW, lSE)));
+
+  vec2 dir = vec2(
+    -((lNW + lNE) - (lSW + lSE)),
+    ((lNW + lSW) - (lNE + lSE))
+  );
+
+  float dirReduce = max((lNW + lNE + lSW + lSE) * 0.03125, 0.0078125);
+  float rcpDirMin = 1.0 / (min(abs(dir.x), abs(dir.y)) + dirReduce);
+
+  dir = min(vec2(8, 8), max(vec2(-8, -8), dir * rcpDirMin)) * pixel;
+
+  vec3 rgbA = 0.5 * (
+    texture2D(tex, uv + dir * (1.0 / 3.0 - 0.5)).rgb +
+    texture2D(tex, uv + dir * (2.0 / 3.0 - 0.5)).rgb
+  );
+
+  vec3 rgbB = rgbA * 0.5 + 0.25 * (
+    texture2D(tex, uv + dir * -0.5).rgb +
+    texture2D(tex, uv + dir * 0.5).rgb
+  );
+
+  float lB = dot(rgbB, l);
+
+  return mix(
+    vec4(rgbB, 1),
+    vec4(rgbA, 1),
+    max(sign(lB - lMin), 0.0) * max(sign(lB - lMax), 0.0)
+  );
+}
+
+void main() {
+  gl_FragColor = fxaa(tMap, vUv, uResolution);
+}
+`;
 
 
 export const useMaterials = () => {
     const size = useThree((s) => s.size);
-
+    const baseUniforms = {
+        texelSize: { value: new Vector2() },
+        // Add other common uniforms if needed
+    };
     const shaderMaterials = useMemo(() => {
         const advection = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uVelocity: { value: new Texture() },
                 uSource: { value: new Texture() },
                 dt: { value: 0.014 },
@@ -239,6 +295,7 @@ export const useMaterials = () => {
 
         const clear = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uTexture: { value: new Texture() },
                 uClearValue: { value: OPTS.pressure },
                 texelSize: { value: new Vector2() },
@@ -249,6 +306,7 @@ export const useMaterials = () => {
 
         const curl = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uVelocity: { value: new Texture() },
                 texelSize: { value: new Vector2() },
             },
@@ -258,6 +316,7 @@ export const useMaterials = () => {
 
         const divergence = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uVelocity: { value: new Texture() },
                 texelSize: { value: new Vector2() },
             },
@@ -267,6 +326,7 @@ export const useMaterials = () => {
 
         const gradientSubstract = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uPressure: { value: new Texture() },
                 uVelocity: { value: new Texture() },
                 texelSize: { value: new Vector2() },
@@ -277,6 +337,7 @@ export const useMaterials = () => {
 
         const pressure = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uPressure: { value: new Texture() },
                 uDivergence: { value: new Texture() },
                 texelSize: { value: new Vector2() },
@@ -287,6 +348,7 @@ export const useMaterials = () => {
 
         const splat = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uTarget: { value: new Texture() },
                 aspectRatio: { value: size.width / size.height },
                 uColor: { value: new Vector3() },
@@ -300,6 +362,7 @@ export const useMaterials = () => {
 
         const vorticity = new ShaderMaterial({
             uniforms: {
+                 ...baseUniforms,
                 uVelocity: { value: new Texture() },
                 uCurl: { value: new Texture() },
                 uCurlValue: { value: OPTS.curl },
@@ -308,6 +371,16 @@ export const useMaterials = () => {
             },
             vertexShader: baseVertex, // Add vertex shader here
             fragmentShader: vorticityFrag,
+        });
+
+        const fxaa = new ShaderMaterial({
+            uniforms: {
+                ...baseUniforms,
+                tMap: { value: new Texture() }, // This should be set to the render target you want to apply FXAA to
+                uResolution: { value: new Vector2(size.width, size.height) },
+            },
+            vertexShader: baseVertex, // Use a base vertex shader here
+            fragmentShader: fxaaFragment,
         });
 
         return {
@@ -319,13 +392,14 @@ export const useMaterials = () => {
             gradientSubstract,
             advection,
             vorticity,
+            fxaa,
         };
     }, [size]);
 
     useEffect(() => {
-        for (const material of Object.values(shaderMaterials)) {
-            const aspectRatio = size.width / (size.height + 400);
+        const aspectRatio = size.width / size.height;
 
+        for (const material of Object.values(shaderMaterials)) {
             material.uniforms.texelSize.value.set(1 / (OPTS.simRes * aspectRatio), 1 / OPTS.simRes);
             material.depthTest = false;
             material.depthWrite = false;

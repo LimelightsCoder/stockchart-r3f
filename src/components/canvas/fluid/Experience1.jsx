@@ -6,7 +6,7 @@ import {
   Pixelation,
   Grid,
   SSAO,
-  N8AO
+  ChromaticAberration,
 } from "@react-three/postprocessing";
 import {
   BlendFunction,
@@ -16,24 +16,22 @@ import { useEffect, useState } from "react";
 import { Leva, useControls } from "leva";
 
 const Experience1 = () => {
-  const [isMobile, setIsMobile] = useState(false);
+  const [isMobile] = useState(window.innerWidth <= 768);
   const [activeScene, setActiveScene] = useState(1); // Track active scene
-  const Width = window.innerWidth;
-  const Height = window.innerHeight;
+  // const Width = window.innerWidth;
+  // const Height = window.innerHeight;
 
   // Set mobile state based on window size
-  useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth <= 768);
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     setIsMobile(window.innerWidth <= 768);
+  //     // Optionally, you can trigger a re-render or update
+  //   };
 
-    // Check the window size on mount and on resize
-    handleResize();
-    window.addEventListener("resize", handleResize);
-
-    // Cleanup listener on unmount
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //   handleResize();
+  //   window.addEventListener("resize", handleResize);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
   // Define the cursor radius based on device
   const cursorRadius = isMobile ? 0.055 : 0.15;
@@ -51,6 +49,7 @@ const Experience1 = () => {
   //   setActiveScene(scene); // Update the active scene based on the control
   // }, [scene]);
 
+  
   return (
     <>
      
@@ -61,21 +60,26 @@ const Experience1 = () => {
             activeScene={activeScene} // Pass the current active scene to Fluid
             curl={0.75}
             radius={cursorRadius}
+            distortion={0.5}
             force={10}
             swirl={0.75}
             blend={10}
             pressure={0.9}
             fluidColor={activeScene === 1 ? '#ffffff' : '#0000ff'} // Change fluid color based on scene
-            intensity={1.5}
+            intensity={0.5}
             densityDissipation={0.9}
             velocityDissipation={0.9}
             rainbow={false}
             showBackground={false}
+            // alpha={0.5} 
           />
            <Pixelation
             granularity={10}
           />
-          
+            <ChromaticAberration
+    blendFunction={BlendFunction.NORMAL} // blend mode
+    offset={[0.02, 0.002]} // color offset
+  />
 
       </EffectComposer>
     </>

@@ -1,7 +1,7 @@
 "use client"
 import { createPortal, useFrame, useThree } from '@react-three/fiber';
 import { useCallback, useMemo, useRef } from 'react';
-import { Camera, Color, Mesh, Scene, Texture, Vector2, Vector3 } from 'three';
+import { Camera, Color, Mesh, Scene, Texture, Vector2, Vector3, ShaderMaterial, PlaneGeometry, MeshBasicMaterial } from 'three';
 import { ShaderPass } from 'three/examples/jsm/postprocessing/ShaderPass';
 import { Effect as FluidEffect } from './effects/Fluid';
 import { useFBOs } from './hooks/useFBOs';
@@ -9,6 +9,10 @@ import { useMaterials } from './hooks/useMaterial';
 
 import { OPTS } from './constant';
 import { usePointer } from './hooks/usePointer';
+// import FluidWithChromaticAberration from './shaders/ChromaticAberrationMaterial';
+
+
+
 
 export const Fluid = ({
   blend = OPTS.blend,
@@ -80,8 +84,28 @@ export const Fluid = ({
     [materials],
   );
 
+  // const Width = window.innerWidth;
+  // const Height = window.innerHeight;
+
+  // const bodyMesh = useMemo(() => {
+  //   const geometry = new PlaneGeometry(Width, 3);
+  //   const material = new MeshBasicMaterial({ color: 0xffffff }); // Set initial color here
+  //   const mesh = new Mesh(geometry, material);
+    
+  //   // Set position (adjust Z as needed)
+  //   mesh.position.set(0, 2.75, 3); // Moves the mesh back in the Z direction
+  //   return mesh;
+  // }, [size]);
+  
+
   useFrame(() => {
     if (!meshRef.current || !postRef.current) return;
+
+  // Update time for animations
+  // if (bodyMesh.material.uniforms) {
+  //   bodyMesh.material.uniforms.uTime.value += 0.05; // Update bodyMesh time
+  //   bodyMesh.material.uniforms.uAlpha.value = 0.5; // Example value; change based on your logic
+  // }
 
     for (let i = splatStack.length - 1; i >= 0; i--) {
       const { mouseX, mouseY, velocityX, velocityY } = splatStack[i];
@@ -144,6 +168,7 @@ export const Fluid = ({
 
     gl.setRenderTarget(null);
     gl.clear();
+    
   });
 
   return (
@@ -158,6 +183,9 @@ export const Fluid = ({
         bufferScene,
       )}
 
+{/* <primitive object={bodyMesh} /> */}
+
+
       <FluidEffect
         intensity={intensity * 0.0001}
         rainbow={rainbow}
@@ -169,6 +197,7 @@ export const Fluid = ({
         ref={postRef}
         tFluid={FBOs.density.read.texture}
       />
+    
     </>
   );
 };

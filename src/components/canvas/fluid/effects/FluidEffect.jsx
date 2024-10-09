@@ -1,11 +1,12 @@
 import { Effect } from 'postprocessing';
 import { Texture, Uniform, Vector3 } from 'three';
 import { hexToRgb } from '../utils';
+import * as THREE from 'three';
 
 // Fragment shader code as a string
 const fragment = `
+uniform float uAlpha; // Add the uniform for alpha transparency
 uniform sampler2D tFluid;
-
 uniform vec3 uColor;
 uniform vec3 uBackgroundColor;
 
@@ -21,12 +22,13 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     vec4 texture = texture2D(inputBuffer, distortedUv);
 
     float intensity = length(fluidColor) * (uIntensity * 1.0);
-    vec3 selectedColor = (uColor*2.0) * length(fluidColor);
+    vec3 selectedColor = (uColor * 2.0) * length(fluidColor);
     vec4 colorForFluidEffect = vec4(uRainbow == 1.0 ? fluidColor : selectedColor, 1.0);
     vec4 computedBgColor = vec4(uBackgroundColor, 1.0);
 
     if(uShowBackground == 0.0) {
         outputColor = mix(texture, colorForFluidEffect, intensity);
+        outputColor.a *= uAlpha;  // Apply alpha value here
         return;
     }
 
@@ -40,7 +42,9 @@ void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor)
     }
 
     outputColor = finalColor;
+    outputColor.a *= uAlpha; // Multiply final alpha with uAlpha uniform
 }
+
 `;
 
 export class FluidEffect extends Effect {
@@ -54,7 +58,10 @@ export class FluidEffect extends Effect {
             uShowBackground: new Uniform(props.showBackground || false),
             uColor: new Uniform(hexToRgb(props.fluidColor || '#FFFFFF')),
             uBackgroundColor: new Uniform(hexToRgb(props.backgroundColor || '#000000')),
-
+            uAlpha: new Uniform(props.alpha || 1), // Add alpha uniform here
+            uROffset: new Uniform(new THREE.Vector2(0.01, 0)), // Adjust red offset
+            uGOffset: new Uniform(new THREE.Vector2(0, 0.01)), // Adjust green offset
+            uBOffset: new Uniform(new THREE.Vector2(-0.01, -0.01)), // Adjust blue offset
         };
 
         super('FluidEffect', fragment, { uniforms: new Map(Object.entries(uniforms)) });
@@ -81,6 +88,11 @@ export class FluidEffect extends Effect {
         this.updateUniform('uShowBackground', this.state.showBackground || false);
         this.updateUniform('uColor', hexToRgb(this.state.fluidColor || '#FFFFFF'));
         this.updateUniform('uBackgroundColor', hexToRgb(this.state.backgroundColor || '#000000'));
-
+        this.updateUniform('uAlpha', this.state.alpha || 1); // Update alpha uniform
+        
+        // Update the RGB offsets dynamically if required
+        this.updateUniform('uROffset', new THREE.Vector2(this.state.redOffset || 0.01, 0)); // Update red offset
+        this.updateUniform('uGOffset', new THREE.Vector2(0, this.state.greenOffset || 0.01)); // Update green offset
+        this.updateUniform('uBOffset', new THREE.Vector2(this.state.blueOffset || -0.01, -0.01)); // Update blue offset
     }
 }

@@ -242,7 +242,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
-import { EffectComposer, Pixelation, Noise, Bloom, DotScreen } from '@react-three/postprocessing';
+import { EffectComposer, Pixelation, Noise, Bloom, DotScreen, } from '@react-three/postprocessing';
 import { KernelSize, BlendFunction } from "postprocessing";
 import { Text } from '@react-three/drei'; // Import Text from drei
 import styles from './style.module.scss'; // Ensure this CSS module exists
@@ -277,7 +277,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
   const [showPixelTransition, setShowPixelTransition] = useState(false); // Control the pixelation shader
   const [pixelSize, setPixelSize] = useState(1); // Initialize pixel size for smooth transition
   const isMobile = window.innerWidth <= 768;
-  //const [scale, setScale] = useState(1);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
     const interval = 100; // Update progress every 100 ms
@@ -302,7 +302,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
               if (prev >= 50) { // Set max pixel size for full effect
                 clearInterval(pixelInterval);
                 setTimeout(() => {
-                  //setScale(1.25);
+                  setScale(0);
                   onStarted(); // Trigger final start
                 }, 800); // Delay to let the effect complete
                 return prev;
@@ -324,8 +324,8 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
         <motion.div
           className="loading-screen"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, transition: { duration: 0.5 } }}
-          //style={{ scale }}
+          exit={{ opacity: 0, transition: { duration: 1.5 } }}
+          style={{ scale }}
         >
           <div className="webgl-canvas-container">
             <Canvas>
@@ -355,11 +355,20 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                 )}
                 {isMobile && (
                    <>
-                    <Pixelation granularity={4} />
+                    <Pixelation granularity={6} />
                     <DotScreen
                   blendFunction={BlendFunction.COLOR_DODGE} 
                   angle={Math.PI * 0.5}
                   scale={25.0}
+                />
+                <Bloom
+                  luminanceThreshold={0}
+                  luminanceSmoothing={0.5}
+                  height={400}
+                  intensity={0.15}
+                  radius={2}
+                  kernelSize={KernelSize.MEDIUM} // blur kernel size
+                  mipmapBlur={false} // Enables or disables mipmap blur.
                 />
                 </>
                   )}
@@ -387,7 +396,7 @@ const Loader = ({ started, onStarted, loadingDuration = 3000 }) => {
                 <motion.mesh
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1, transition: { duration: 1 } }}
-                  exit={{ opacity: 0, transition: { duration: 0.5 } }}
+                  exit={{ opacity: 0, transition: { duration: 1.5 } }}
                 >
                   <DissolveTransition pixelSize={pixelSize} />
                 </motion.mesh>

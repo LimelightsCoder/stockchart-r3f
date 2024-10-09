@@ -23,10 +23,10 @@ const MobileMenu = () => {
                 // fontSize: isMobile ? '2vw' : '1.75vw',
                 mixBlendMode:'difference'
             }}>
-                <Link href="/" passHref>
+                {/* <Link href="/" passHref> */}
                     <button 
                         style={{ 
-                            pointerEvents: 'auto', 
+                            pointerEvents: 'none', 
                             color: 'white', 
                             paddingRight: '10px', 
                             paddingLeft: '10px', 
@@ -37,7 +37,7 @@ const MobileMenu = () => {
                     >
                         &copy; Cory Parrish
                     </button>
-                </Link>
+                {/* </Link> */}
             </div>
 
             <div style={{

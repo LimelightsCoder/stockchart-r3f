@@ -78,7 +78,7 @@ const Experience1 = () => {
           />
             <ChromaticAberration
           blendFunction={BlendFunction.NORMAL} // blend mode
-          offset={[0.0125, 0.00125]} // color offset
+          offset={[0.015, 0.0015]} // color offset
         />
 
       </EffectComposer>

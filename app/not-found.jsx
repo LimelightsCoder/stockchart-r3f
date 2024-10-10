@@ -30,7 +30,7 @@ export default function Page() {
  <div className="relative h-screen w-full flex flex-col justify-center items-center  text-white " style={{  zIndex:2, mixBlendMode:'difference' }}>
       <h1 className="flex  text-6xl font-bold mb-4 select-none" >404</h1>
       <p className="flex  text-lg mb-8 select-none" >Under Construction, coming soon!</p>
-      <Link href="https://www.coryparrish.dev/">
+      <Link href="/">
         <p className="flex  text-blue-400 underline hover:text-blue-300" >
           Lets get you back home
         </p>

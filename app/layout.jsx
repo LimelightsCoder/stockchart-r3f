@@ -9,8 +9,8 @@ const MobileMenu = dynamic(() => import('@/components/dom/menuLayout/MobileMenu'
 
 
 export const metadata = {
-  title: 'Cory Parrish | Creative Developer',
-  description: 'Official Website of Developer Cory Parrish, Creative Coder, Web Developer.',
+  title: 'Data Visualization | GLB 2 JSON',
+  description: 'Open Source file converter | Development',
 }
 
 export default function RootLayout({ children }) {

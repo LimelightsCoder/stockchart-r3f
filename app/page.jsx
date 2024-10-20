@@ -153,7 +153,7 @@ export default function Page() {
           <TreeGraph data={treeData} />
         </div>
       )}
-      <div className='relative w-full h-full'> 
+      <div className='relative w-full h-full mb-[100px]'> 
       <p className='font-bold'>Advantages of JSON:</p>
 <ul>
     <li>
@@ -183,7 +183,7 @@ export default function Page() {
     </li>
 </ul>
       </div>
-<br></br>
+
       </div>
     </div>
   );

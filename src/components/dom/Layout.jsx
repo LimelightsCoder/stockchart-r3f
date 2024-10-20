@@ -4,7 +4,7 @@ import { useRef, useState, useEffect } from 'react'
 import dynamic from 'next/dynamic'
 
 const Scene = dynamic(() => import('@/components/canvas/Scene'), { ssr: false })
-const Loader = dynamic(() => import('../canvas/loader/Loader'), { ssr: false })
+// const Loader = dynamic(() => import('../canvas/loader/Loader'), { ssr: false })
 
 const Layout = ({ children }) => {
   const ref = useRef()
@@ -27,91 +27,6 @@ const Layout = ({ children }) => {
   }, [loading]);
   
 
-
-    // useEffect(() => {
-    //   let svg, rects = [];
-    //   const numberOfSections = 4; // Number of sections
-    //   const fillColor = '#ff000011'; // Color for the sections
-    
-    //   function createSvg() {
-    //     const width = window.innerWidth;
-    //     const height = window.innerHeight;
-    
-    //     svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    //     svg.setAttribute('class', 'shadow-svg');
-    //     svg.setAttribute('width', width);
-    //     svg.setAttribute('height', height * numberOfSections);
-    
-    //     // Set styles
-    //     svg.style.position = 'fixed';
-    //     svg.style.top = '0';
-    //     svg.style.left = '0';
-    //     svg.style.zIndex = '2';
-    //     svg.style.pointerEvents = 'none';
-    //     svg.style.touchAction = 'none';
-    
-    //     // Create the filter
-    //     const defs = document.createElementNS('http://www.w3.org/2000/svg', 'defs');
-    //     const filter = document.createElementNS('http://www.w3.org/2000/svg', 'filter');
-    //     filter.setAttribute('id', 'blendFilter');
-    
-    //     // Apply a blend mode (like 'screen' or 'difference')
-    //     const feBlend = document.createElementNS('http://www.w3.org/2000/svg', 'feBlend');
-    //     feBlend.setAttribute('mode', 'difference'); // Try 'difference', 'multiply', 'screen', etc.
-    //     feBlend.setAttribute('in', 'SourceGraphic');
-    //     feBlend.setAttribute('in2', 'BackgroundImage');
-    //     filter.appendChild(feBlend);
-    
-    //     defs.appendChild(filter);
-    //     svg.appendChild(defs); // Add filter to the SVG
-    
-    //     document.body.appendChild(svg);
-    
-    //     // Create sections as rects
-    //     for (let i = 0; i < numberOfSections; i++) {
-    //       const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-    //       rect.setAttribute('x', 0);
-    //       rect.setAttribute('y', i * height);
-    //       rect.setAttribute('width', width);
-    //       rect.setAttribute('height', height);
-    //       rect.setAttribute('fill', fillColor);
-    
-    //       // Apply the filter
-    //       rect.setAttribute('filter', 'url(#blendFilter)');
-    
-    //       svg.appendChild(rect);
-    //       rects.push(rect); // Store rect for later resizing
-    //     }
-    //   }
-    
-    //   function resizeSvg() {
-    //     const width = window.innerWidth;
-    //     const height = window.innerHeight;
-    
-    //     // Update the size of the SVG
-    //     svg.setAttribute('width', width);
-    //     svg.setAttribute('height', height * numberOfSections);
-    
-    //     // Update the size and position of each rect
-    //     rects.forEach((rect, i) => {
-    //       rect.setAttribute('width', width);
-    //       rect.setAttribute('height', height);
-    //       rect.setAttribute('y', i * height);
-    //     });
-    //   }
-    
-    //   createSvg(); // Create the SVG initially
-    //   window.addEventListener('resize', resizeSvg); // Handle window resize
-    
-    //   // Cleanup on component unmount
-    //   return () => {
-    //     window.removeEventListener('resize', resizeSvg);
-    //     if (svg) {
-    //       svg.remove(); // Remove the SVG when the component unmounts
-    //     }
-    //   };
-    // }, []);
-    
 
   return (
     <>

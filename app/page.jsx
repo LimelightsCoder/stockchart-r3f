@@ -1,9 +1,8 @@
 'use client'
 
-import WordSplit from '@/components/dom/textSplit/WordSplit';
-import Experience2 from '@/components/canvas/fluid/Experience2';
+
 import dynamic from 'next/dynamic';
-import Image from 'next/image';
+
 import { Suspense, useState, useEffect } from 'react';
 import TreeGraph from '@/components/dom/treeGraph/treeGraph';
 import FileUpload from '@/components/dom/fileUpload/fileUpload';
@@ -12,14 +11,13 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import * as d3 from 'd3';
 
-const Bars = dynamic(() => import('@/components/canvas/bar'), { ssr: false });
-const CurrentTime = dynamic(() => import('@/components/dom/utils/CurrentTime'), { ssr: false });
+
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
     <div className='flex h-96 w-full flex-col items-center justify-center'>
-      <svg className='-ml-1 mr-3 h-5 w-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
+      <svg className='-ml-1 mr-3 size-5 animate-spin text-black' fill='none' viewBox='0 0 24 24'>
         <circle className='opacity-25' cx='12' cy='12' r='10' stroke='currentColor' strokeWidth='4' />
         <path
           className='opacity-75'
@@ -135,10 +133,10 @@ export default function Page() {
   };
 
   return (
-    <div className='relative size-screen text-center overflow-hidden'>
+    <div className='relative h-screen w-screen text-center overflow-x-hidden'>
       <div className='flex flex-col h-full w-full mt-24'>
         <h1>Tree Graph Data Visualization</h1>
-        <p>supports, json, csv, and glb files. * DRACO compressed glb's are supported.</p>
+        <p>supports, json, csv, and glb files. * DRACO compressed glb&apos;s are supported.</p>
         <FileUpload onFileUpload={handleFileUpload} />
         {jsonData && (
           <button 
@@ -150,20 +148,25 @@ export default function Page() {
         )}
         {isLoading && <p>Loading...</p>}
         {errorMessage && <p className='text-red-500'>{errorMessage}</p>} {/* Display error messages */}
-        {treeData && <TreeGraph data={treeData} />}
-        <p className='font-bold'>Advantages of JSON:</p>
+        {treeData && (
+        <div style={{ overflowY: 'auto', minHeight: '50vh' }}> {/* Added a wrapper for scrolling */}
+          <TreeGraph data={treeData} />
+        </div>
+      )}
+      <div className='relative w-full h-full'> 
+      <p className='font-bold'>Advantages of JSON:</p>
 <ul>
     <li>
         <strong>Flexibility:</strong> JSON can capture all properties of Three.js objects, including those that GLTF/GLB may not support. This means you can include additional custom data, metadata, or properties that are important for your application.
     </li>
     <li>
-        <strong>Ease of Use:</strong> Working with JSON can be simpler in some contexts, especially when debugging or making modifications to the data, since it's human-readable.
+        <strong>Ease of Use:</strong> Working with JSON can be simpler in some contexts, especially when debugging or making modifications to the data, since it&apos;s human-readable.
     </li>
     <li>
         <strong>Faster Serialization/Deserialization:</strong> In some scenarios, converting between Three.js objects and JSON can be quicker than GLTF/GLB, especially for simpler or smaller models.
     </li>
     <li>
-        <strong>No Compression Loss:</strong> Since JSON is text-based, there's no risk of losing data due to compression artifacts, which can be a concern with binary formats if not handled correctly.
+        <strong>No Compression Loss:</strong> Since JSON is text-based, there&apos;s no risk of losing data due to compression artifacts, which can be a concern with binary formats if not handled correctly.
     </li>
 </ul>
 <br></br>
@@ -179,6 +182,7 @@ export default function Page() {
         <strong>Standardized Format:</strong> GLTF/GLB is an established format that many 3D engines and platforms support, making it easier to share models across different applications.
     </li>
 </ul>
+      </div>
 <br></br>
       </div>
     </div>

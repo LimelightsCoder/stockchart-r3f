@@ -142,11 +142,11 @@ const TreeGraph = ({ data }) => {
 
     update(null, root);
 
-  }, [data, dimensions]);
+  }, [data, dimensions, margin]);
 
   return (
-    <div style={{ overflow: 'auto', maxWidth: '100%', padding: '20px', overflowX:'auto' }}>
-      <svg style={{width:'100%', height:'100vh', minHeight:'1000px'}} ref={svgRef}></svg>
+    <div style={{ maxWidth: '100%', height: '100vh', padding: '20px', background: '#ccc', position: 'relative', overflow: 'auto' }}> {/* Added overflow: auto */}
+      <svg style={{ position: 'relative', width: '100%', height: '100%', minHeight: '800px' }} ref={svgRef}></svg> {/* Set minHeight for SVG */}
     </div>
   );
 };

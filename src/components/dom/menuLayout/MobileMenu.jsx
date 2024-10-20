@@ -11,7 +11,7 @@ const MobileMenu = () => {
     return (
         <>
  <div style={{
-                backgroundColor: '#000000cc', // Example background color
+                backgroundColor: '#000000', // Example background color
                 padding: '10px', // Add padding for spacing
                 // borderRadius: '8px', // Optional: rounded corners
                 display: 'flex', // Use flexbox for alignment
@@ -41,7 +41,7 @@ const MobileMenu = () => {
                                 textTransform: 'uppercase' ,
                                 fontSize: '1rem'
                             }}
-                            className='py-2 font-bold select-none logo-hover' // Add a class for the logo
+                            className='py-2 font-bold select-none ' // Add a class for the logo
                         >
                           GLB 2 JSON & Data Visualization
                         </button>

@@ -4,7 +4,6 @@ import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link';
 const CurrentTime = dynamic(() => import('@/components/dom/utils/CurrentTime'), { ssr: false });
-const Glass = dynamic(() => import('@/components/canvas/glass/Glass'), { ssr: false })
 
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,

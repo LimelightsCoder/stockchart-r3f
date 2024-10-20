@@ -17,7 +17,7 @@ export default function Scene({ ...props }) {
       onCreated={(state) => (state.gl.toneMapping = THREE.AgXToneMapping)}
     >
 
-      <Experience1 />
+      {/* <Experience1 /> */}
       {/* @ts-ignore */}
       <r3f.Out />
       <Preload all />

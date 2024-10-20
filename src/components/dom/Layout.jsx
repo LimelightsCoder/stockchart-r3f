@@ -115,10 +115,10 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      {loading && (
+      {/* {loading && (
         <Loader started={loading} onStarted={handleLoadingStarted} />
       )}
-      {!loading && ( // Render the Scene only after loading is done
+      {!loading && (  */}
         <div
           ref={ref}
           style={{
@@ -143,7 +143,7 @@ const Layout = ({ children }) => {
             eventPrefix="client"
           />
         </div>
-      )}
+      {/* )} */}
     </>
 
   )

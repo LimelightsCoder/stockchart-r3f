@@ -1,20 +1,20 @@
 'use client'
 
-import Experience2 from '@/components/canvas/fluid/Experience2'
-// import Glass from '@/components/canvas/glass/Glass'
-// import VideoSection from '@/components/canvas/video/VideoSection'
+import WordSplit from '@/components/dom/textSplit/WordSplit';
+import Experience2 from '@/components/canvas/fluid/Experience2';
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { Suspense, useState, useEffect } from 'react';
+import TreeGraph from '@/components/dom/treeGraph/treeGraph';
+import FileUpload from '@/components/dom/fileUpload/fileUpload';
+import { REVISION } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+import * as d3 from 'd3';
 
-import Projects from '@/components/dom/projects'
-import WordSplit from '@/components/dom/textSplit/WordSplit'
-import Work from '@/components/dom/work'
-import dynamic from 'next/dynamic'
-import Image from 'next/image'
-import { Suspense, useState, useEffect } from 'react'
+const Bars = dynamic(() => import('@/components/canvas/bar'), { ssr: false });
 const CurrentTime = dynamic(() => import('@/components/dom/utils/CurrentTime'), { ssr: false });
-const Glass = dynamic(() => import('@/components/canvas/glass/Glass'), { ssr: false })
-const Logo = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Logo), { ssr: false })
-const Dog = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Dog), { ssr: false })
-const Duck = dynamic(() => import('@/components/canvas/Examples').then((mod) => mod.Duck), { ssr: false })
+
 const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.View), {
   ssr: false,
   loading: () => (
@@ -29,191 +29,183 @@ const View = dynamic(() => import('@/components/canvas/View').then((mod) => mod.
       </svg>
     </div>
   ),
-})
-const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false })
+});
+
+const Common = dynamic(() => import('@/components/canvas/View').then((mod) => mod.Common), { ssr: false });
 
 export default function Page() {
-  const [menuIsActive, setMenuIsActive] = useState(false);
+  const [treeData, setTreeData] = useState(null);
+  const [jsonData, setJsonData] = useState(null); // State to hold JSON data for downloading
+  const [errorMessage, setErrorMessage] = useState(null); // State for error messages
+  const [isLoading, setIsLoading] = useState(false); // State for loading indicator
 
+  const handleFileUpload = async (file) => {
+    setTreeData(null);
+    setJsonData(null); // Clear previous JSON data
+    setErrorMessage(null); // Clear old error messages
+    setIsLoading(true); // Start loading
+
+    const fileExtension = file.name.split('.').pop().toLowerCase();
+    let parsedData;
+  
+    try {
+      if (fileExtension === 'json') {
+        const fileText = await file.text();
+        parsedData = JSON.parse(fileText);
+      } else if (fileExtension === 'csv') {
+        const fileText = await file.text();
+        const csvData = d3.csvParse(fileText);
+        parsedData = convertCsvToHierarchy(csvData);
+      } else if (fileExtension === 'glb' || fileExtension === 'gltf') {
+        parsedData = await parseGLTF(file);
+      } else {
+        throw new Error('Unsupported file format. Please upload a JSON, CSV, GLB, or GLTF file.');
+      }
+      
+      setTreeData(parsedData);
+      setJsonData(parsedData); // Save parsed data for download
+    } catch (error) {
+      setErrorMessage(error.message);
+    } finally {
+      setIsLoading(false); // Stop loading
+    }
+  };
+
+  const parseGLTF = (file) => {
+    return new Promise((resolve, reject) => {
+      const loader = new GLTFLoader();
+      const dracoLoader = new DRACOLoader();
+  
+      // Set the path to your Draco decoder files using the REVISION variable
+      const THREE_PATH = `https://unpkg.com/three@0.${REVISION}.x`;
+      dracoLoader.setDecoderPath(`${THREE_PATH}/examples/jsm/libs/draco/gltf/`);
+      loader.setDRACOLoader(dracoLoader);
+  
+      const reader = new FileReader();
+  
+      reader.onload = (event) => {
+        const arrayBuffer = event.target.result;
+        loader.parse(arrayBuffer, '', (gltf) => {
+          resolve(gltfToJSON(gltf));
+        }, (error) => {
+          reject(new Error('Failed to parse GLTF/GLB file: ' + error));
+        });
+      };
+  
+      reader.onerror = (error) => reject(new Error('Failed to read file: ' + error));
+      reader.readAsArrayBuffer(file);
+    });
+  };
+
+  const gltfToJSON = (gltf) => {
+    return {
+      name: gltf.scene.name || 'GLTF Model',
+      children: convertGLTFToHierarchy(gltf.scene.children),
+      scene: gltf.scene || undefined, // Handle optional property
+      cameras: gltf.cameras || [], // Default to an empty array if no cameras
+      lights: gltf.lights || [], // Default to an empty array if no lights
+    };
+  };
+  
+  const convertGLTFToHierarchy = (children) => {
+    return children.map((child) => ({
+      name: child.name || 'Unnamed',
+      position: child.position ? child.position.toArray() : null, // Handle optional property
+      rotation: child.rotation ? child.rotation.toArray() : null, // Handle optional property
+      scale: child.scale ? child.scale.toArray() : null, // Handle optional property
+      type: child.type || 'Unknown', // Default to 'Unknown' if type is not defined
+      geometry: child.geometry ? child.geometry.attributes : undefined, // Handle optional property
+      children: convertGLTFToHierarchy(child.children),
+    }));
+  };
 
   
-  
 
-  
-  const HeroParagraph = `I am a developer and designer with a multicultural background, having lived in diverse locations such as New York and California, currently working as an independent creative.`;
-  const AboutParagraph = `I’m a developer with three years of self-taught experience, beginning my journey in the arts and economics. I specialize in creating engaging and interactive frontend experiences. My freelance work has allowed me to collaborate with diverse clients and industries, delivering cutting-edge web solutions using JavaScript, React, Next.js, and Node.js, alongside advanced 3D development skills in WebGL, THREE.js, and React Three Fiber. When I'm not at my computer, I enjoy staying fit through activities like hiking and weightlifting, or learning new skills.`;
-  const Skill1 = `A versatile programming language that enables dynamic content and interactivity on web pages, forming the backbone of modern web development. It is essential for smooth scrolling, animations, and DOM manipulation.`;
-  const Skill2 = `A JavaScript API for rendering interactive 2D and 3D graphics in the browser without the need for plugins, allowing for immersive visual experiences. It leverages GPU power for enhanced performance.`;
-  const Skill3 = `A JavaScript runtime built on Chrome's V8 engine, enabling the development of scalable server-side applications and APIs with ease.`;
-  const Skill4 = `My preferred CMS that provides clients with an easy and intuitive way of managing content, making it simple to create and update their web presence.`;
-
+  const downloadJSON = (data) => {
+    const json = JSON.stringify(data, null, 2);
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'model.json';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
 
   return (
-    <>
-      {/* Main Container */}
-      <div className='relative size-full text-center overflow-hidden' 
-      // style={{mixBlendMode: 'difference'}}
-      >
-        
-        {/* Overlay HTML Content */}
-        <div className='relative flex flex-col items-center justify-center  w-full h-full text-white py-20' style={{ pointerEvents: 'none', zIndex:2, mixBlendMode:'difference' }}>
-          {/* Title Section with 100vh height */}
-          <div className='flex flex-col items-start justify-center h-screen w-[96vw] text-start py-8'>
-          {/* <h1 className='flex relative my-4 text-5xl font-bold leading-tight uppercase'>Cory.dev</h1> */}
-            <p className='flex uppercase text-[8vw] pointer-events-none select-none'>creative developer</p>
-            <div className='flex relative w-[65vw] pointer-events-none select-none'>
-                <WordSplit value={HeroParagraph} className='text-[2vw] pointer-events-none select-none'/>
-            </div>
-            
-            <p className="flex relative text-start justify-start items-start mt-12 text-[3vw] pointer-events-none select-none">Based in Los Angeles</p>
-            <CurrentTime/>
-            
-            {/* <div className="field">
-              <div className="mouse"></div>
-            </div> */}
-            <div className='absolute flex  top-[80vh] right-4'>
-            <svg width="5vw" height="5vh" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg"> <g clipPath="url(#clip0_116_153)"> <path d="M100 0C103.395 53.7596 146.24 96.6052 200 100C146.24 103.395 103.395 146.24 100 200C96.6052 146.24 53.7596 103.395 0 100C53.7596 96.6052 96.6052 53.7596 100 0Z" fill="url(#paint0_linear_116_153)"/> </g> <defs> <linearGradient id="paint0_linear_116_153" x1="100" y1="0" x2="100" y2="200" gradientUnits="userSpaceOnUse"> <stop stopColor="#ffffff"/> <stop offset="1" stopColor="#ffffff"/> </linearGradient> <clipPath id="clip0_116_153"> <rect width="200" height="200" fill="white"/> </clipPath> </defs> </svg>
-            </div>
-          </div>
-
-
-
-
-
-          {/* Project Overview Section */}
-          <section className="mt-10 mb-10 text-center">
-            <h2 className="flex w-[96vw] px-4 text-[3.75vw] font-bold uppercase pointer-events-none select-none">Experiments</h2>
-            {/* <p className="mt-2 text-lg">Selection of demo projects, and experiments.</p> */}
-          </section>
-          {/* Project Cards Section */}
-          <section className="relative flex" style={{pointerEvents: 'auto',  zIndex: 11, 
-            // touchAction:'unset'
-            }}>
-            {/* <Projects /> */}
-<Work/>
-
-          </section>
-
-          <h2 className="flex w-[96vw] text-[2vw] font-bold uppercase pointer-events-none select-none text-[#5f5f5f]">core tools</h2>
-          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 w-full gap-4 mb-[100px] pointer-events-none select-none">
-            <div className="p-4 text-white" style={{ height: 'auto' }}>
-              <div style={{ fontSize: '3vw' }}>JavaScript</div>
-              <WordSplit value={Skill1} />
-            </div>
-            <div className="p-4 text-white" style={{ height: 'auto' }}>
-              <div style={{ fontSize: '3vw' }}>WebGL</div>
-              <WordSplit value={Skill2} />
-            </div>
-            <div className="p-4 text-white" style={{ height: 'auto' }}>
-              <div style={{ fontSize: '3vw' }}>Node.js</div>
-              <WordSplit value={Skill3} /> 
-              </div>
-            <div className="p-4 text-white" style={{ height: 'auto' }}>
-              <div style={{ fontSize: '3vw' }}>Prismic.io</div>
-              <WordSplit value={Skill4} />
-                </div>
-          </section>
-
-
-
-            {/* About */}
-            {/* <section className="mt-10 mb-10 text-center">
-            <h2 className="flex w-[96vw] px-4 text-[3.75vw] font-bold uppercase pointer-events-none select-none">About</h2>
-
-            <div className="flex px-4  mt-2 sm:max-w-[75vw] pointer-events-none select-none">
-            <WordSplit value={AboutParagraph} />
-            </div>
-          </section> */}
-
-
-
-          <section className="grid grid-cols-1 w-full sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-[100px] pointer-events-none select-none">
-          <div className="border rounded-sm p-4 text-white" style={{ height: '300px' }}>
-            <Image
-              src="/img/IMG_9225.jpg"
-              width={0}
-              height={0}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              alt="Picture of the author"
-            />
-          </div>
-          <div className="border rounded-sm p-4 text-white" style={{ height: '300px' }}>
-            <Image
-              src="/img/IMG_7328.jpg"
-              width={0}
-              height={0}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              alt="Picture of the author"
-            />
-          </div>
-          <div className="border rounded-sm p-4 text-white" style={{ height: '300px' }}>
-            <Image
-              src="/img/IMG_0144.jpg"
-              width={0}
-              height={0}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              alt="Picture of the author"
-            />
-          </div>
-          <div className="border rounded-sm p-4 text-white" style={{ height: '300px' }}>
-            <Image
-              src="/img/IMG_3100.JPG"
-              width={0}
-              height={0}
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ width: '100%', height: '100%', objectFit: 'cover' }} 
-              alt="Picture of the author"
-            />
-          </div>
-            {/* <div className="border rounded-sm p-4  text-white">
-              <h3 className="text-xl font-semibold uppercase">Resources</h3>
-              <p className="mt-2 text-lg">Posts about exciting topics, and innovations in the tech world.</p>
-            </div> */}
-          </section>
-          {/* <section className="grid grid-cols-1 h-screen sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className=" w-screen  p-4  text-white">
-              <h3 className="text-[3.75vw] font-semibold uppercase">Lets Work</h3>
-            </div>
-          </section> */}
-        </div>
-
-
-        {/* Button Section */}
-        {/* <div style={{
-          position: 'fixed',
-          zIndex: 15,
-          top: '20px',
-          right: '20px',
-          pointerEvents: 'auto',
-          display: 'flex',
-          gap: '10px',
-          fontSize:'2.25vw',
-          
-        }}>
-          <button onClick={() => console.log('Button Clicked!')} style={{ color: 'white',  paddingRight: '10px', paddingLeft: '10px', borderRadius: '24px', textTransform:'uppercase' }}>
-            Experiments
+    <div className='relative size-screen text-center overflow-hidden'>
+      <div className='flex flex-col h-full w-full mt-24'>
+        <h1>Tree Graph Data Visualization</h1>
+        <p>supports, json, csv, and glb files. * DRACO compressed glb's are supported.</p>
+        <FileUpload onFileUpload={handleFileUpload} />
+        {jsonData && (
+          <button 
+            onClick={() => downloadJSON(jsonData)} 
+            className='mt-4 p-2 bg-blue-500 text-white rounded'
+          >
+            Download JSON
           </button>
-          <button onClick={() => console.log('Button Clicked!')} style={{ color: 'white',  paddingRight: '10px', paddingLeft: '10px', borderRadius: '24px', textTransform:'uppercase' }}>
-            About
-          </button>
-          <button onClick={() => console.log('Button Clicked!')} style={{ color: 'white',  paddingRight: '10px', paddingLeft: '10px', borderRadius: '24px', textTransform:'uppercase' }}>
-            Contact
-          </button>
-        </div> */}
-
-
-
-        {/* View Component with Fixed Position */}
-        {/* <View className='fixed top-0 left-0 w-full h-full flex items-center justify-center z-1' style={{touchAction:'unset'}}>
-          <Suspense fallback={null}>
-            <Experience2 />
-            <Common />
-          </Suspense>
-        </View> */}
+        )}
+        {isLoading && <p>Loading...</p>}
+        {errorMessage && <p className='text-red-500'>{errorMessage}</p>} {/* Display error messages */}
+        {treeData && <TreeGraph data={treeData} />}
+        <p className='font-bold'>Advantages of JSON:</p>
+<ul>
+    <li>
+        <strong>Flexibility:</strong> JSON can capture all properties of Three.js objects, including those that GLTF/GLB may not support. This means you can include additional custom data, metadata, or properties that are important for your application.
+    </li>
+    <li>
+        <strong>Ease of Use:</strong> Working with JSON can be simpler in some contexts, especially when debugging or making modifications to the data, since it's human-readable.
+    </li>
+    <li>
+        <strong>Faster Serialization/Deserialization:</strong> In some scenarios, converting between Three.js objects and JSON can be quicker than GLTF/GLB, especially for simpler or smaller models.
+    </li>
+    <li>
+        <strong>No Compression Loss:</strong> Since JSON is text-based, there's no risk of losing data due to compression artifacts, which can be a concern with binary formats if not handled correctly.
+    </li>
+</ul>
+<br></br>
+<p className='font-bold'>Advantages of GLB/GLTF:</p>
+<ul>
+    <li>
+        <strong>File Size:</strong> GLB files are generally much smaller because they are binary and can include compressed assets. This is particularly beneficial for web applications where loading time is crucial.
+    </li>
+    <li>
+        <strong>Performance:</strong> GLB files can be loaded more efficiently in WebGL contexts because they are optimized for rendering, with fewer processing steps needed during parsing.
+    </li>
+    <li>
+        <strong>Standardized Format:</strong> GLTF/GLB is an established format that many 3D engines and platforms support, making it easier to share models across different applications.
+    </li>
+</ul>
+<br></br>
       </div>
-    </>
-  )
+    </div>
+  );
 }
+
+const convertCsvToHierarchy = (csvData) => {
+  const hierarchy = { name: 'Root', children: [] };
+  const map = {};
+
+  csvData.forEach((row) => {
+    const node = { name: row.name, children: [] };
+    map[row.name] = node;
+  });
+
+  csvData.forEach((row) => {
+    const node = map[row.name];
+    if (row.parent) {
+      if (map[row.parent]) {
+        map[row.parent].children.push(node);
+      } else {
+        hierarchy.children.push(node);
+      }
+    } else {
+      hierarchy.children.push(node);
+    }
+  });
+
+  return hierarchy;
+};

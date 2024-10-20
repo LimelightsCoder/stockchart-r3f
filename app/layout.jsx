@@ -28,7 +28,7 @@ export default function RootLayout({ children }) {
           <MobileMenu />
             {/* To avoid FOUT with styled-components wrap Layout with StyledComponentsRegistry https://beta.nextjs.org/docs/styling/css-in-js#styled-components */}
             {children}
-          <Footer/>
+          {/* <Footer/> */}
          </Layout>
         </Scroll>
       </body>

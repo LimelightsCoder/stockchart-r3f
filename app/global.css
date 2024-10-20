@@ -64,18 +64,34 @@ font-display: swap;
     padding: 0;
     overflow: hidden;
     touch-action: unset;
-    background-color: #000000;
+    background-color: #eeeeee;
     font-family: 'Wotfard-Regular', 'GeneralSans';
     user-select: none;
     /* mix-blend-mode: difference; */
   }
 }
 
-[data-scroll-container] {
-  touch-action: auto; /* Enable native touch gestures on scroll container */
-
+/* styles.css */
+.tree-container {
+  overflow: auto;
+  max-width: 100%;
+  min-height: 100vh;
+  padding: 20px;
 }
 
+.link {
+  fill: none;
+  stroke: #555;
+  stroke-width: 2;
+}
+
+.node circle {
+  fill: #00B8ff;
+}
+
+.node text {
+  font-size: 12px; /* Default size */
+}
 
 
 /* .scroll-container {

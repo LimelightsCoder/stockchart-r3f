@@ -21,7 +21,6 @@ To get started with the project, clone the repository:
 git clone https://github.com/LimelightsCoder/your-repo-name.git
 cd your-repo-name
 
-Then install the dependencies:
 npm install
 
 npm run dev
